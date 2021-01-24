@@ -5,8 +5,18 @@ module regfile(input  logic        clk,
                output logic [31:0] rd1, rd2);
 
   logic [31:0]     rf[31:0];
-
+	begin
+	if (we3 != 1)
+	
+	else 
+	always @ (posedge clk)
+	 begin
+	
+	 end 
+	end
+	
   // three ported register file
+
   // read two ports combinationally
   // write third port on rising edge of clock
   // register 0 hardwired to 0
