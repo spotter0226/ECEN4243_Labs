@@ -5,15 +5,29 @@ module regfile(input  logic        clk,
                output logic [31:0] rd1, rd2);
 
   logic [31:0]     rf[31:0];
+
+	always_comb
 	begin
-	if (we3 != 1)
+		if (ra1 == 0) 
+			rd1 <= 0;
+		else	
+			rd1 <= rf[ra1];
+		if (ra2 == 0) 
+			rd2 <= 0;	
+		else	
+			rd2 <= rf[ra2];
 	
-	else 
+	end
+
 	always @ (posedge clk)
 	 begin
-	
+	if (we3 == 1)
+	     rf[wa3] <= wd3;
 	 end 
-	end
+	
+	
+	
+	
 	
   // three ported register file
 
