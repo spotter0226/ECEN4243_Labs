@@ -1,0 +1,44 @@
+module regfile_tb();
+
+    logic        clk, 
+    logic        we3, 
+    logic [4:0]  ra1, ra2, wa3, 
+    logic [31:0] wd3, 
+    logic [31:0] rd1, rd2
+
+    integer handle3;
+    integer desc3;
+
+
+regfile dut (.clk (clk), 
+             .we3(we3), 
+             .ra1(ra1), .ra2(ra2), .wa3(wa3), 
+             .wd3(wd3), 
+             .rd1(rd1), .rd2(rd2));
+
+
+    initial 
+      begin  
+        clock = 1'b1;
+        forever #5 clock = ~clock;
+      end
+
+ initial
+      begin
+        // Gives output file name
+        handle3 = $fopen("test.out");
+        // Tells when to finish simulation
+        #500 $finish;         
+      end
+
+    always 
+      begin
+        desc3 = handle3;
+        #5 $fdisplay(desc3, "%b %b || %b", reset_b, In, Out);
+      end
+
+initial
+     begin
+	#0 we3 = 0;
+	#
+     end

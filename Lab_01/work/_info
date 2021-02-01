@@ -14,44 +14,45 @@ VBQ4GHH77TLMMRbmhVe4`k2
 04 8 4 work stimulus fast 0
 =1-8cec4b6e38ba-600b4d7a-1a0-38fc
 o-quiet -auto_acc_if_foreign -work work +acc
-Z1 tCvgOpt 0
+tCvgOpt 0
 n@_opt
 OL;O;10.7f;67
+R0
 vFSM
-Z2 DXx6 sv_std 3 std 0 22 d=_JfHTnXCN[H5FjiaJJc0
-Z3 !s110 1611353465
+Z1 DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
+Z2 !s110 1612215090
 !i10b 1
-!s100 GRU87g]3cl2;Kg=?h4Ulm3
-IZI1Z`QHT8E@Me=Ci>V]_G2
-Z4 VDg1SIo80bB@j0V0VzS_@n1
+!s100 `oJd9]WNG7`gjld:ZA0;b1
+I<aALgmXhNPg:e>]Fz2Xez0
+Z3 VDg1SIo80bB@j0V0VzS_@n1
 !s105 FSM_sv_unit
 S1
-R0
-Z5 w1611351680
+Z4 dD:/GitHub/ECEN4243_Labs/Lab_01
+Z5 w1611955949
 8FSM.sv
 FFSM.sv
 L0 1
-Z6 OL;L;10.7f;67
+Z6 OP;L;10.4a;61
 r1
 !s85 0
 31
-Z7 !s108 1611353465.000000
+Z7 !s108 1612215089.000000
 Z8 !s107 FSM_tb.sv|FSM.sv|
 Z9 !s90 -reportprogress|300|FSM.sv|FSM_tb.sv|
-!i113 0
-Z10 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R1
+!s101 -O0
+!i113 1
+Z10 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact -O0
 n@f@s@m
 vstimulus
+R1
 R2
-R3
 !i10b 1
-!s100 A6;A6@m:V>9APW7jFzlOQ0
-IhM9Ue30hm9^iF2i?@hm1C0
-R4
+!s100 RMbHK?iU5`E2G<_8g3og>1
+Il6^?lHhR4Gj01TQZ7nBm53
+R3
 !s105 FSM_tb_sv_unit
 S1
-R0
+R4
 R5
 8FSM_tb.sv
 FFSM_tb.sv
@@ -63,6 +64,6 @@ r1
 R7
 R8
 R9
-!i113 0
+!s101 -O0
+!i113 1
 R10
-R1
