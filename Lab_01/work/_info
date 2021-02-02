@@ -20,15 +20,15 @@ OL;O;10.7f;67
 R0
 vFSM
 Z1 DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
-Z2 !s110 1612215090
+Z2 !s110 1612221869
 !i10b 1
 !s100 `oJd9]WNG7`gjld:ZA0;b1
 I<aALgmXhNPg:e>]Fz2Xez0
 Z3 VDg1SIo80bB@j0V0VzS_@n1
 !s105 FSM_sv_unit
 S1
-Z4 dD:/GitHub/ECEN4243_Labs/Lab_01
-Z5 w1611955949
+Z4 dC:/Users/Steph/Documents/GitHub/ECEN4243_Labs/Lab_01
+Z5 w1611351682
 8FSM.sv
 FFSM.sv
 L0 1
@@ -36,7 +36,7 @@ Z6 OP;L;10.4a;61
 r1
 !s85 0
 31
-Z7 !s108 1612215089.000000
+Z7 !s108 1612221869.000000
 Z8 !s107 FSM_tb.sv|FSM.sv|
 Z9 !s90 -reportprogress|300|FSM.sv|FSM_tb.sv|
 !s101 -O0
