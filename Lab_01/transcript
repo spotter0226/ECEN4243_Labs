@@ -1,44 +1,37 @@
-# do FSM.do
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is jreiche@CEAT-ENDV360-23.
-# 
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
-# Start time: 17:24:29 on Feb 01,2021
-# vlog -reportprogress 300 FSM.sv FSM_tb.sv 
-# -- Compiling module FSM
-# -- Compiling module stimulus
-# 
-# Top level modules:
-# 	stimulus
-# End time: 17:24:29 on Feb 01,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# //  ModelSim PE Student Edition 10.4a Apr  7 2015 
+# //  ModelSim SE-64 10.7f Mar 24 2020
 # //
-# //  Copyright 1991-2015 Mentor Graphics Corporation
+# //  Copyright 1991-2020 Mentor Graphics Corporation
 # //  All Rights Reserved.
 # //
-# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
-# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
-# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
-# //  THIS DOCUMENT CONTAINS TRADE SECRETS AND COMMERCIAL OR FINANCIAL
-# //  INFORMATION THAT ARE PRIVILEGED, CONFIDENTIAL, AND EXEMPT FROM
-# //  DISCLOSURE UNDER THE FREEDOM OF INFORMATION ACT, 5 U.S.C. SECTION 552.
-# //  FURTHERMORE, THIS INFORMATION IS PROHIBITED FROM DISCLOSURE UNDER
-# //  THE TRADE SECRETS ACT, 18 U.S.C. SECTION 1905.
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
 # //
-# // NOT FOR CORPORATE OR PRODUCTION USE.
-# // THE ModelSim PE Student Edition IS NOT A SUPPORTED PRODUCT.
-# // FOR HIGHER EDUCATION PURPOSES ONLY
-# //
-# vsim -do "FSM.do" 
-# Start time: 17:24:30 on Feb 01,2021
+# do regfile.do
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is jreiche@CEAT-ENDV360-23.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is jreiche@CEAT-ENDV360-23.
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim SE-64 vlog 10.7f Compiler 2020.03 Mar 24 2020
+# Start time: 16:53:10 on Feb 05,2021
+# vlog -reportprogress 300 regfile.sv regfile__tb.sv 
+# -- Compiling module regfile
+# -- Compiling module regfile__tb
+# 
+# Top level modules:
+# 	regfile__tb
+# End time: 16:53:10 on Feb 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -voptargs="+acc" work.regfile__tb 
+# Start time: 16:53:10 on Feb 05,2021
+# ** Note: (vsim-3812) Design is being optimized...
 # Loading sv_std.std
-# Loading work.stimulus
-# Loading work.FSM
+# Loading work.regfile__tb(fast)
+# Loading work.regfile(fast)
 # .main_pane.list.interior.cs.body
 # .main_pane.wave.interior.cs.body.pw.wf
-# wrong # args: should be "load file ?pkg? ?interp?"
-# wrong # args: should be "load file ?pkg? ?interp?"
-# End time: 17:28:03 on Feb 01,2021, Elapsed time: 0:03:33
-# Errors: 2, Warnings: 0
+# End time: 16:54:59 on Feb 05,2021, Elapsed time: 0:01:49
+# Errors: 0, Warnings: 0

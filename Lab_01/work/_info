@@ -11,59 +11,77 @@ Z0 dC:/Users/jreiche/Desktop/ECEN4243Lab1/lab1_files/lab_files
 T_opt
 !s110 1611353466
 VBQ4GHH77TLMMRbmhVe4`k2
-04 8 4 work stimulus fast 0
+Z1 04 8 4 work stimulus fast 0
 =1-8cec4b6e38ba-600b4d7a-1a0-38fc
-o-quiet -auto_acc_if_foreign -work work +acc
-tCvgOpt 0
+Z2 o-quiet -auto_acc_if_foreign -work work +acc
+Z3 tCvgOpt 0
 n@_opt
-OL;O;10.7f;67
+Z4 OL;O;10.7f;67
 R0
-vFSM
-Z1 DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
-Z2 !s110 1612221869
-!i10b 1
-!s100 `oJd9]WNG7`gjld:ZA0;b1
-I<aALgmXhNPg:e>]Fz2Xez0
-Z3 VDg1SIo80bB@j0V0VzS_@n1
-!s105 FSM_sv_unit
-S1
-Z4 dC:/Users/Steph/Documents/GitHub/ECEN4243_Labs/Lab_01
-Z5 w1611351682
-8FSM.sv
-FFSM.sv
-L0 1
-Z6 OP;L;10.4a;61
-r1
-!s85 0
-31
-Z7 !s108 1612221869.000000
-Z8 !s107 FSM_tb.sv|FSM.sv|
-Z9 !s90 -reportprogress|300|FSM.sv|FSM_tb.sv|
-!s101 -O0
-!i113 1
-Z10 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact -O0
-n@f@s@m
-vstimulus
+T_opt1
+!s110 1612562926
+V2TmRRD]Pa2]7H`k@a:IU61
 R1
+=1-8cec4b6e38ba-601dc1ee-2bb-aec
 R2
-!i10b 1
-!s100 RMbHK?iU5`E2G<_8g3og>1
-Il6^?lHhR4Gj01TQZ7nBm53
 R3
-!s105 FSM_tb_sv_unit
-S1
+n@_opt1
 R4
+R0
+T_opt2
+Z5 !s110 1612565590
+Vfh322nn[SSnYN_5c_1GU@1
+04 11 4 work regfile__tb fast 0
+=1-8cec4b6e38ba-601dcc56-1fa-344c
+R2
+R3
+n@_opt2
+R4
+vregfile
+Z6 DXx6 sv_std 3 std 0 22 d=_JfHTnXCN[H5FjiaJJc0
 R5
-8FSM_tb.sv
-FFSM_tb.sv
+!i10b 1
+!s100 4]d2mVR9komGU=@^QT?YC1
+IhcHPhk>dVRC^C_FG1>m>[2
+Z7 VDg1SIo80bB@j0V0VzS_@n1
+!s105 regfile_sv_unit
+S1
+Z8 dC:/Users/jreiche/Desktop/ECEN4243Lab1/ECEN4243_Labs-main/Lab_01
+w1612561012
+8regfile.sv
+Fregfile.sv
 L0 1
-R6
+Z9 OL;L;10.7f;67
 r1
 !s85 0
 31
+Z10 !s108 1612565590.000000
+Z11 !s107 regfile__tb.sv|regfile.sv|
+Z12 !s90 -reportprogress|300|regfile.sv|regfile__tb.sv|
+!i113 0
+Z13 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R3
+vregfile__tb
+R6
+R5
+!i10b 1
+!s100 FGJDQN;MH]cD2A7MZERSf3
+IDU8eKNUJRl8=DJ8^OPDPF2
 R7
+!s105 regfile__tb_sv_unit
+S1
 R8
+w1612565569
+8regfile__tb.sv
+Fregfile__tb.sv
+L0 1
 R9
-!s101 -O0
-!i113 1
+r1
+!s85 0
+31
 R10
+R11
+R12
+!i113 0
+R13
+R3

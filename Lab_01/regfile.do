@@ -27,18 +27,17 @@ if [file exists work] {
 vlib work
 
 # compile source files
-vlog FSM.sv FSM_tb.sv 
 vlog regfile.sv regfile__tb.sv
 
 # start and run simulation
-vsim -voptargs=+acc work.stimulus 
+vsim -voptargs=+acc work.regfile__tb
 
 view list
 view wave
 
 -- display input and output signals as hexidecimal values
 # Diplays All Signals recursively
-add wave -hex -r /stimulus/*
+add wave -hex -r /regfile__tb/*
 
 # Adapt to make Waveform Viewer prettier :)
 #add wave -noupdate -divider -height 32 "MIPS Datapath"
