@@ -28,100 +28,51 @@ R3
 n@_opt1
 R4
 R0
-vFSM
-Z5 DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
-Z6 !s110 1612757796
-!i10b 1
-!s100 `oJd9]WNG7`gjld:ZA0;b1
-I<aALgmXhNPg:e>]Fz2Xez0
-Z7 VDg1SIo80bB@j0V0VzS_@n1
-!s105 FSM_sv_unit
-S1
-Z8 dD:/GitHub/ECEN4243_Labs/Lab_01
-Z9 w1611955949
-8FSM.sv
-FFSM.sv
-L0 1
-Z10 OP;L;10.4a;61
-r1
-!s85 0
-31
-Z11 !s108 1612757796.000000
-Z12 !s107 FSM_tb.sv|FSM.sv|
-Z13 !s90 -reportprogress|300|FSM.sv|FSM_tb.sv|
-!s101 -O0
-!i113 1
-Z14 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact -O0
-n@f@s@m
 vregfile
-R5
-R6
+Z5 DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
+Z6 !s110 1612758181
 !i10b 1
 !s100 ^BDz@;V@X0c]GBdJ:G1I:0
 Ie6<KH<VA?XCQPd8@VE98i3
-R7
+Z7 VDg1SIo80bB@j0V0VzS_@n1
 !s105 regfile_sv_unit
 S1
-R8
+Z8 dD:/GitHub/ECEN4243_Labs/Lab_01
 w1612213797
 8regfile.sv
 Fregfile.sv
 L0 1
-R10
+Z9 OP;L;10.4a;61
 r1
 !s85 0
 31
-R11
-Z15 !s107 regfile__tb.sv|regfile.sv|
-Z16 !s90 -reportprogress|300|regfile.sv|regfile__tb.sv|
+Z10 !s108 1612758181.000000
+Z11 !s107 regfile__tb.sv|regfile.sv|
+Z12 !s90 -reportprogress|300|regfile.sv|regfile__tb.sv|
 !s101 -O0
 !i113 1
-R14
+Z13 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact -O0
 vregfile__tb
 R5
 R6
 !i10b 1
-!s100 I>TmTSINBaHzh9[bP9Qo=3
-IT7PA_QQMZ3;aQj`QH77Ce1
+!s100 91JNAPeRHZSYVIdCdKc5n1
+ICliWeei<dNzLoE6<]TmOm0
 R7
 !s105 regfile__tb_sv_unit
 S1
 R8
-w1612649499
+w1612758164
 8regfile__tb.sv
 Fregfile__tb.sv
 L0 1
-R10
-r1
-!s85 0
-31
-R11
-R15
-R16
-!s101 -O0
-!i113 1
-R14
-vstimulus
-R5
-R6
-!i10b 1
-!s100 RMbHK?iU5`E2G<_8g3og>1
-Il6^?lHhR4Gj01TQZ7nBm53
-R7
-!s105 FSM_tb_sv_unit
-S1
-R8
 R9
-8FSM_tb.sv
-FFSM_tb.sv
-L0 1
-R10
 r1
 !s85 0
 31
+R10
 R11
 R12
-R13
 !s101 -O0
 !i113 1
-R14
+R13

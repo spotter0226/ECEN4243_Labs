@@ -34,7 +34,7 @@ regfile dut (.clk (clk),
     always 
       begin
         desc3 = handle3;
-        #5 $fdisplay(desc3, "%b %b || %b", ra1, ra2, rd1);
+        #5 $fdisplay(desc3, "%b %b || %b", rd1, rd2, wd3);
       end
 
 initial
