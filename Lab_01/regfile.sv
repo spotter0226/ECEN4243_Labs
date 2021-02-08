@@ -6,9 +6,9 @@ module regfile(input  logic        clk,
 
   logic [31:0]     rf[31:0];
 
-	always_comb
+	always_comb // Combinational statement 
 	begin
-		if (ra1 == 0) 
+		if (ra1 == 0) // Assigning ports
 			rd1 <= 0;
 		else	
 			rd1 <= rf[ra1];
@@ -19,21 +19,15 @@ module regfile(input  logic        clk,
 	
 	end
 
-	always @ (posedge clk)
+	always @ (posedge clk) // Always do on the positive edge of the clock
 	 begin
-	if (we3 == 1)
+	if (we3 == 1) // If we3 is enabled then allow write
 	     rf[wa3] <= wd3;
 	 end 
-	
-	
-	
-	
-	
-  // three ported register file
-
-  // read two ports combinationally
-  // write third port on rising edge of clock
-  // register 0 hardwired to 0
+	if (ra0 != 0) // register 0 hardwired to 0
+		rf[ra0] <= 0;
+	end
+  	
 
 
 endmodule // regfile
