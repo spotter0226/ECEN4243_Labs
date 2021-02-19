@@ -18,7 +18,7 @@
 #define C_NXT ( (NEXT_STATE.CPSR>>29) & 0x00000001 )
 #define V_NXT ( (NEXT_STATE.CPSR>>28) & 0x00000001 )
 
-#define N_N 0x80000000
+#define N_N 0x80000000 
 #define Z_N 0x40000000
 #define C_N 0x20000000
 #define V_N 0x10000000
