@@ -97,32 +97,32 @@ int AND (int Rd, int Rn, int Operand2, int I, int S, int CC) {
     int Rs = (Operand2 & 0x00000F00) >> 8;
     if (bit4 == 0) 
       switch (sh) {
-      case 0: cur = CURRENT_STATE.REGS[Rn] + 
+      case 0: cur = CURRENT_STATE.REGS[Rn] && 
 	  (CURRENT_STATE.REGS[Rm] << shamt5);
 	  break;
-      case 1: cur = CURRENT_STATE.REGS[Rn] + 
+      case 1: cur = CURRENT_STATE.REGS[Rn] && 
 	  (CURRENT_STATE.REGS[Rm] >> shamt5);
 	  break;
-      case 2: cur = CURRENT_STATE.REGS[Rn] + 
+      case 2: cur = CURRENT_STATE.REGS[Rn] && 
 	  (CURRENT_STATE.REGS[Rm] >> shamt5);
     	  break;
-      case 3: cur = CURRENT_STATE.REGS[Rn] + 
+      case 3: cur = CURRENT_STATE.REGS[Rn] &&
 	      ((CURRENT_STATE.REGS[Rm] >> shamt5) |
                (CURRENT_STATE.REGS[Rm] << (32 - shamt5)));
 	  break;
       }     
     else
       switch (sh) {
-      case 0: cur = CURRENT_STATE.REGS[Rn] + 
+      case 0: cur = CURRENT_STATE.REGS[Rn] && 
 	  (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 1: cur = CURRENT_STATE.REGS[Rn] + 
+      case 1: cur = CURRENT_STATE.REGS[Rn] &&
 	  (CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 2: cur = CURRENT_STATE.REGS[Rn] + 
+      case 2: cur = CURRENT_STATE.REGS[Rn] &&
 	  (CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 3: cur = CURRENT_STATE.REGS[Rn] + 
+      case 3: cur = CURRENT_STATE.REGS[Rn] &&
 	      ((CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]) |
                (CURRENT_STATE.REGS[Rm] << (32 - CURRENT_STATE.REGS[Rs])));
 	  break;
@@ -131,7 +131,7 @@ int AND (int Rd, int Rn, int Operand2, int I, int S, int CC) {
   if (I == 1) {
     int rotate = Operand2 >> 8;
     int Imm = Operand2 & 0x000000FF;
-    cur = CURRENT_STATE.REGS[Rn] + (Imm>>2*rotate|(Imm<<(32-2*rotate)));
+    cur = CURRENT_STATE.REGS[Rn] && (Imm>>2*rotate|(Imm<<(32-2*rotate)));
   }
   NEXT_STATE.REGS[Rd] = cur;
   if (S == 1) {
@@ -155,32 +155,32 @@ int EOR (int Rd, int Rn, int Operand2, int I, int S, int CC) {
     int Rs = (Operand2 & 0x00000F00) >> 8;
     if (bit4 == 0) 
       switch (sh) {
-      case 0: cur = CURRENT_STATE.REGS[Rn] + 
+      case 0: cur = CURRENT_STATE.REGS[Rn] ^ 
 	  (CURRENT_STATE.REGS[Rm] << shamt5);
 	  break;
-      case 1: cur = CURRENT_STATE.REGS[Rn] + 
+      case 1: cur = CURRENT_STATE.REGS[Rn] ^ 
 	  (CURRENT_STATE.REGS[Rm] >> shamt5);
 	  break;
-      case 2: cur = CURRENT_STATE.REGS[Rn] + 
+      case 2: cur = CURRENT_STATE.REGS[Rn] ^ 
 	  (CURRENT_STATE.REGS[Rm] >> shamt5);
     	  break;
-      case 3: cur = CURRENT_STATE.REGS[Rn] + 
+      case 3: cur = CURRENT_STATE.REGS[Rn] ^ 
 	      ((CURRENT_STATE.REGS[Rm] >> shamt5) |
                (CURRENT_STATE.REGS[Rm] << (32 - shamt5)));
 	  break;
       }     
     else
       switch (sh) {
-      case 0: cur = CURRENT_STATE.REGS[Rn] + 
+      case 0: cur = CURRENT_STATE.REGS[Rn] ^ 
 	  (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 1: cur = CURRENT_STATE.REGS[Rn] + 
+      case 1: cur = CURRENT_STATE.REGS[Rn] ^ 
 	  (CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 2: cur = CURRENT_STATE.REGS[Rn] + 
+      case 2: cur = CURRENT_STATE.REGS[Rn] ^ 
 	  (CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 3: cur = CURRENT_STATE.REGS[Rn] + 
+      case 3: cur = CURRENT_STATE.REGS[Rn] ^ 
 	      ((CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]) |
                (CURRENT_STATE.REGS[Rm] << (32 - CURRENT_STATE.REGS[Rs])));
 	  break;
@@ -189,7 +189,7 @@ int EOR (int Rd, int Rn, int Operand2, int I, int S, int CC) {
   if (I == 1) {
     int rotate = Operand2 >> 8;
     int Imm = Operand2 & 0x000000FF;
-    cur = CURRENT_STATE.REGS[Rn] + (Imm>>2*rotate|(Imm<<(32-2*rotate)));
+    cur = CURRENT_STATE.REGS[Rn] ^ (Imm>>2*rotate|(Imm<<(32-2*rotate)));
   }
   NEXT_STATE.REGS[Rd] = cur;
   if (S == 1) {
@@ -213,32 +213,32 @@ int SUB (int Rd, int Rn, int Operand2, int I, int S, int CC) {
     int Rs = (Operand2 & 0x00000F00) >> 8;
     if (bit4 == 0) 
       switch (sh) {
-      case 0: cur = CURRENT_STATE.REGS[Rn] + 
+      case 0: cur = CURRENT_STATE.REGS[Rn] - 
 	  (CURRENT_STATE.REGS[Rm] << shamt5);
 	  break;
-      case 1: cur = CURRENT_STATE.REGS[Rn] + 
+      case 1: cur = CURRENT_STATE.REGS[Rn] - 
 	  (CURRENT_STATE.REGS[Rm] >> shamt5);
 	  break;
-      case 2: cur = CURRENT_STATE.REGS[Rn] + 
+      case 2: cur = CURRENT_STATE.REGS[Rn] - 
 	  (CURRENT_STATE.REGS[Rm] >> shamt5);
     	  break;
-      case 3: cur = CURRENT_STATE.REGS[Rn] + 
+      case 3: cur = CURRENT_STATE.REGS[Rn] - 
 	      ((CURRENT_STATE.REGS[Rm] >> shamt5) |
                (CURRENT_STATE.REGS[Rm] << (32 - shamt5)));
 	  break;
       }     
     else
       switch (sh) {
-      case 0: cur = CURRENT_STATE.REGS[Rn] + 
+      case 0: cur = CURRENT_STATE.REGS[Rn] - 
 	  (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 1: cur = CURRENT_STATE.REGS[Rn] + 
+      case 1: cur = CURRENT_STATE.REGS[Rn] - 
 	  (CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 2: cur = CURRENT_STATE.REGS[Rn] + 
+      case 2: cur = CURRENT_STATE.REGS[Rn] - 
 	  (CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 3: cur = CURRENT_STATE.REGS[Rn] + 
+      case 3: cur = CURRENT_STATE.REGS[Rn] - 
 	      ((CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]) |
                (CURRENT_STATE.REGS[Rm] << (32 - CURRENT_STATE.REGS[Rs])));
 	  break;
@@ -247,7 +247,7 @@ int SUB (int Rd, int Rn, int Operand2, int I, int S, int CC) {
   if (I == 1) {
     int rotate = Operand2 >> 8;
     int Imm = Operand2 & 0x000000FF;
-    cur = CURRENT_STATE.REGS[Rn] + (Imm>>2*rotate|(Imm<<(32-2*rotate)));
+    cur = CURRENT_STATE.REGS[Rn] - (Imm>>2*rotate|(Imm<<(32-2*rotate)));
   }
   NEXT_STATE.REGS[Rd] = cur;
   if (S == 1) {
@@ -329,32 +329,32 @@ int SBC (int Rd, int Rn, int Operand2, int I, int S, int CC) {
     int Rs = (Operand2 & 0x00000F00) >> 8;
     if (bit4 == 0) 
       switch (sh) {
-      case 0: cur = CURRENT_STATE.REGS[Rn] + 
+      case 0: cur = CURRENT_STATE.REGS[Rn] - 
 	  (CURRENT_STATE.REGS[Rm] << shamt5);
 	  break;
-      case 1: cur = CURRENT_STATE.REGS[Rn] + 
+      case 1: cur = CURRENT_STATE.REGS[Rn] - 
 	  (CURRENT_STATE.REGS[Rm] >> shamt5);
 	  break;
-      case 2: cur = CURRENT_STATE.REGS[Rn] + 
+      case 2: cur = CURRENT_STATE.REGS[Rn] - 
 	  (CURRENT_STATE.REGS[Rm] >> shamt5);
     	  break;
-      case 3: cur = CURRENT_STATE.REGS[Rn] + 
+      case 3: cur = CURRENT_STATE.REGS[Rn] - 
 	      ((CURRENT_STATE.REGS[Rm] >> shamt5) |
                (CURRENT_STATE.REGS[Rm] << (32 - shamt5)));
 	  break;
       }     
     else
       switch (sh) {
-      case 0: cur = CURRENT_STATE.REGS[Rn] + 
+      case 0: cur = CURRENT_STATE.REGS[Rn] -
 	  (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 1: cur = CURRENT_STATE.REGS[Rn] + 
+      case 1: cur = CURRENT_STATE.REGS[Rn] - 
 	  (CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 2: cur = CURRENT_STATE.REGS[Rn] + 
+      case 2: cur = CURRENT_STATE.REGS[Rn] - 
 	  (CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 3: cur = CURRENT_STATE.REGS[Rn] + 
+      case 3: cur = CURRENT_STATE.REGS[Rn] - 
 	      ((CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]) |
                (CURRENT_STATE.REGS[Rm] << (32 - CURRENT_STATE.REGS[Rs])));
 	  break;
@@ -619,32 +619,32 @@ int ORR (int Rd, int Rn, int Operand2, int I, int S, int CC) {
     int Rs = (Operand2 & 0x00000F00) >> 8;
     if (bit4 == 0) 
       switch (sh) {
-      case 0: cur = CURRENT_STATE.REGS[Rn] + 
+      case 0: cur = CURRENT_STATE.REGS[Rn] | 
 	  (CURRENT_STATE.REGS[Rm] << shamt5);
 	  break;
-      case 1: cur = CURRENT_STATE.REGS[Rn] + 
+      case 1: cur = CURRENT_STATE.REGS[Rn] | 
 	  (CURRENT_STATE.REGS[Rm] >> shamt5);
 	  break;
-      case 2: cur = CURRENT_STATE.REGS[Rn] + 
+      case 2: cur = CURRENT_STATE.REGS[Rn] | 
 	  (CURRENT_STATE.REGS[Rm] >> shamt5);
     	  break;
-      case 3: cur = CURRENT_STATE.REGS[Rn] + 
+      case 3: cur = CURRENT_STATE.REGS[Rn] | 
 	      ((CURRENT_STATE.REGS[Rm] >> shamt5) |
                (CURRENT_STATE.REGS[Rm] << (32 - shamt5)));
 	  break;
       }     
     else
       switch (sh) {
-      case 0: cur = CURRENT_STATE.REGS[Rn] + 
+      case 0: cur = CURRENT_STATE.REGS[Rn] | 
 	  (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 1: cur = CURRENT_STATE.REGS[Rn] + 
+      case 1: cur = CURRENT_STATE.REGS[Rn] | 
 	  (CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 2: cur = CURRENT_STATE.REGS[Rn] + 
+      case 2: cur = CURRENT_STATE.REGS[Rn] | 
 	  (CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]);
 	  break;
-      case 3: cur = CURRENT_STATE.REGS[Rn] + 
+      case 3: cur = CURRENT_STATE.REGS[Rn] | 
 	      ((CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]) |
                (CURRENT_STATE.REGS[Rm] << (32 - CURRENT_STATE.REGS[Rs])));
 	  break;
