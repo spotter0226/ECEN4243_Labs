@@ -81,7 +81,11 @@ int ADD (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= N_N;
     if (cur == 0)
       NEXT_STATE.CPSR |= Z_N;
-  }	
+    if (cur /*if there is a carry*/)
+      NEXT_STATE.CPSR |= C_N;
+    if (cur /*if there is overflow*/)
+      NEXT_STATE.CPSR |= V_N;
+  }	  
   return 0;
 
 }
@@ -139,6 +143,10 @@ int AND (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= N_N;
     if (cur == 0)
       NEXT_STATE.CPSR |= Z_N;
+     if (cur /*if there is a carry*/)
+      NEXT_STATE.CPSR |= C_N;
+    if (cur /*if there is overflow*/)
+      NEXT_STATE.CPSR |= V_N;
   }	
   return 0;
 
@@ -197,6 +205,10 @@ int EOR (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= N_N;
     if (cur == 0)
       NEXT_STATE.CPSR |= Z_N;
+     if (cur /*if there is a carry*/)
+      NEXT_STATE.CPSR |= C_N;
+    if (cur /*if there is overflow*/)
+      NEXT_STATE.CPSR |= V_N;
   }	
   return 0;
 
@@ -255,6 +267,10 @@ int SUB (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= N_N;
     if (cur == 0)
       NEXT_STATE.CPSR |= Z_N;
+     if (cur /*if there is a carry*/)
+      NEXT_STATE.CPSR |= C_N;
+    if (cur /*if there is overflow*/)
+      NEXT_STATE.CPSR |= V_N;
   }	
   return 0;
 
@@ -313,6 +329,10 @@ int ADC (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= N_N;
     if (cur == 0)
       NEXT_STATE.CPSR |= Z_N;
+     if (cur /*if there is a carry*/)
+      NEXT_STATE.CPSR |= C_N;
+    if (cur /*if there is overflow*/)
+      NEXT_STATE.CPSR |= V_N;
   }	
   return 0;
 
@@ -371,6 +391,10 @@ int SBC (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= N_N;
     if (cur == 0)
       NEXT_STATE.CPSR |= Z_N;
+     if (cur /*if there is a carry*/)
+      NEXT_STATE.CPSR |= C_N;
+    if (cur /*if there is overflow*/)
+      NEXT_STATE.CPSR |= V_N;
   }	
   return 0;
 
@@ -429,6 +453,10 @@ int TST (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= N_N;
     if (cur == 0)
       NEXT_STATE.CPSR |= Z_N;
+     if (cur /*if there is a carry*/)
+      NEXT_STATE.CPSR |= C_N;
+    if (cur /*if there is overflow*/)
+      NEXT_STATE.CPSR |= V_N;
   }	
   return 0;
 
@@ -487,6 +515,10 @@ int TEQ (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= N_N;
     if (cur == 0)
       NEXT_STATE.CPSR |= Z_N;
+     if (cur /*if there is a carry*/)
+      NEXT_STATE.CPSR |= C_N;
+    if (cur /*if there is overflow*/)
+      NEXT_STATE.CPSR |= V_N;
   }	
   return 0;
 
@@ -545,6 +577,10 @@ int CMP (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= N_N;
     if (cur == 0)
       NEXT_STATE.CPSR |= Z_N;
+     if (cur /*if there is a carry*/)
+      NEXT_STATE.CPSR |= C_N;
+    if (cur /*if there is overflow*/)
+      NEXT_STATE.CPSR |= V_N;
   }	
   return 0;
 
@@ -603,6 +639,10 @@ int CMN (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= N_N;
     if (cur == 0)
       NEXT_STATE.CPSR |= Z_N;
+     if (cur /*if there is a carry*/)
+      NEXT_STATE.CPSR |= C_N;
+    if (cur /*if there is overflow*/)
+      NEXT_STATE.CPSR |= V_N;
   }	
   return 0;
 
@@ -661,6 +701,10 @@ int ORR (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= N_N;
     if (cur == 0)
       NEXT_STATE.CPSR |= Z_N;
+     if (cur /*if there is a carry*/)
+      NEXT_STATE.CPSR |= C_N;
+    if (cur /*if there is overflow*/)
+      NEXT_STATE.CPSR |= V_N;
   }	
   return 0;
 
@@ -722,6 +766,10 @@ int BIC (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= N_N;
     if (cur == 0)
       NEXT_STATE.CPSR |= Z_N;
+     if (cur /*if there is a carry*/)
+      NEXT_STATE.CPSR |= C_N;
+    if (cur /*if there is overflow*/)
+      NEXT_STATE.CPSR |= V_N;
   }	
   return 0;
 
@@ -780,6 +828,10 @@ int MVN (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= N_N;
     if (cur == 0)
       NEXT_STATE.CPSR |= Z_N;
+     if (cur /*if there is a carry*/)
+      NEXT_STATE.CPSR |= C_N;
+    if (cur /*if there is overflow*/)
+      NEXT_STATE.CPSR |= V_N;
   }	
   return 0;
 
