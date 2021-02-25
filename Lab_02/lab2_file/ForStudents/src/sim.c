@@ -125,7 +125,6 @@ int data_process(char* i_) {
   printf("Opcode = %s\n Rn = %d\n Rd = %d\n Operand2 = %s\n I = %d\n S = %d\n COND = %s\n", d_opcode, Rn, Rd, byte_to_binary12(Operand2), I, S, byte_to_binary4(CC));
   printf("\n");
 
-  /* Example - use and replicate */
   if(!strcmp(d_opcode,"0000")) {
     printf("--- This is an AND instruction. \n");
     AND(Rd, Rn, Operand2, I, S, CC);
@@ -144,6 +143,7 @@ int data_process(char* i_) {
     return 0;
   }	
 
+  /* Example - use and replicate */
   if(!strcmp(d_opcode,"0100")) {
     printf("--- This is an ADD instruction. \n");
     ADD(Rd, Rn, Operand2, I, S, CC);
