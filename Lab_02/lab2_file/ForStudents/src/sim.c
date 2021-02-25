@@ -125,18 +125,23 @@ int data_process(char* i_) {
   printf("Opcode = %s\n Rn = %d\n Rd = %d\n Operand2 = %s\n I = %d\n S = %d\n COND = %s\n", d_opcode, Rn, Rd, byte_to_binary12(Operand2), I, S, byte_to_binary4(CC));
   printf("\n");
 
+  //AND
   if(!strcmp(d_opcode,"0000")) {
     printf("--- This is an AND instruction. \n");
     AND(Rd, Rn, Operand2, I, S, CC);
     return 0;
   }	
 
+
+  //EOR
   if(!strcmp(d_opcode,"0001")) {
     printf("--- This is an EOR instruction. \n");
     EOR(Rd, Rn, Operand2, I, S, CC);
     return 0;
   }	
 
+
+  //SUB
   if(!strcmp(d_opcode,"0010")) {
     printf("--- This is an SUB instruction. \n");
     SUB(Rd, Rn, Operand2, I, S, CC);
@@ -144,55 +149,73 @@ int data_process(char* i_) {
   }	
 
   /* Example - use and replicate */
+  //ADD
   if(!strcmp(d_opcode,"0100")) {
     printf("--- This is an ADD instruction. \n");
     ADD(Rd, Rn, Operand2, I, S, CC);
     return 0;
   }	
 
+
+  //ADC
   if(!strcmp(d_opcode,"0101")) {
     printf("--- This is an ADC instruction. \n");
     ADC(Rd, Rn, Operand2, I, S, CC);
     return 0;
   }	
 
+
+  //SBC
   if(!strcmp(d_opcode,"0110")) {
     printf("--- This is an SBC instruction. \n");
     SBC(Rd, Rn, Operand2, I, S, CC);
     return 0;
   }	
 
+
+  TST
   if(!strcmp(d_opcode,"1000")) {
     printf("--- This is an TST instruction. \n");
     TST(Rd, Rn, Operand2, I, S, CC);
     return 0;
   }	
 
+
+  //TEQ
   if(!strcmp(d_opcode,"1001")) {
     printf("--- This is an TEQ instruction. \n");
     TEQ(Rd, Rn, Operand2, I, S, CC);
     return 0;
   }	
 
+
+  //CMP
   if(!strcmp(d_opcode,"1010")) {
     printf("--- This is an CMP instruction. \n");
     CMP(Rd, Rn, Operand2, I, S, CC);
     return 0;
   }	
 
+
+  //CMN
   if(!strcmp(d_opcode,"1011")) {
     printf("--- This is an CMN instruction. \n");
     CMN(Rd, Rn, Operand2, I, S, CC);
     return 0;
   }	
 
+
+  //ORR
   if(!strcmp(d_opcode,"1100")) {
     printf("--- This is an ORR instruction. \n");
     ORR(Rd, Rn, Operand2, I, S, CC);
     return 0;
   }	
 
+
+  //SHIFTING
   if(!strcmp(d_opcode,"1101")) {
+      //Needs more work
     printf("--- This is an MOV instruction. \n");
     MOV(Rd, Rn, Operand2, I, S, CC);
     printf("--- This is an LSL instruction. \n");
@@ -206,19 +229,21 @@ int data_process(char* i_) {
     return 0;
   }	
 
+
+  //BIC
   if(!strcmp(d_opcode,"1110")) {
     printf("--- This is an BIC instruction. \n");
     BIC(Rd, Rn, Operand2, I, S, CC);
     return 0;
   }	
 
+
+  //MVN
   if(!strcmp(d_opcode,"1111")) {
     printf("--- This is an MVN instruction. \n");
     MVN(Rd, Rn, Operand2, I, S, CC);
     return 0;
   }	
-
-  /* Add other data instructions here */ 
 
   return 1;	
 }

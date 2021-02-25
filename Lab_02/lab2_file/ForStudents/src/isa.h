@@ -28,6 +28,8 @@
 #include <string.h>
 #include "shell.h"
 
+
+//ADD
 int ADD (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
   int cur = 0;
@@ -90,6 +92,8 @@ int ADD (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
 }
 
+
+//AND
 int AND (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
   int cur = 0;
@@ -152,6 +156,8 @@ int AND (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
 }
 
+
+//EOR
 int EOR (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
   int cur = 0;
@@ -214,6 +220,8 @@ int EOR (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
 }
 
+
+//SUB
 int SUB (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
   int cur = 0;
@@ -276,6 +284,8 @@ int SUB (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
 }
 
+
+//ADC
 int ADC (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
   int cur = 0;
@@ -338,6 +348,8 @@ int ADC (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
 }
 
+
+//SBC
 int SBC (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
   int cur = 0;
@@ -400,6 +412,8 @@ int SBC (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
 }
 
+
+//TST -- NEEDS WORK
 int TST (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
   int cur = 0;
@@ -462,6 +476,8 @@ int TST (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
 }
 
+
+//TEQ -- NEEDS WORK
 int TEQ (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
   int cur = 0;
@@ -524,6 +540,8 @@ int TEQ (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
 }
 
+
+//CMP -- NEEDS WORK
 int CMP (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
   int cur = 0;
@@ -586,6 +604,8 @@ int CMP (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
 }
 
+
+//CMN-  NEEDS WORK
 int CMN (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
   int cur = 0;
@@ -648,6 +668,8 @@ int CMN (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
 }
 
+
+//ORR
 int ORR (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
   int cur = 0;
@@ -765,6 +787,8 @@ int MOV(int Rd, int Rn, int Operand2, int I, int S, int CC) {
     return 0;
 }
 
+
+//MVN
 int MVN(int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
     int cur = 0;
@@ -818,6 +842,8 @@ int MVN(int Rd, int Rn, int Operand2, int I, int S, int CC) {
     return 0;
 }
 
+
+//BIC
 int BIC (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
   int cur = 0;
@@ -880,85 +906,24 @@ int BIC (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
 }
 
-int MVN (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
-  int cur = 0;
-  if(I == 0) {
-    int sh = (Operand2 & 0x00000060) >> 5;
-    int shamt5 = (Operand2 & 0x00000F80) >> 7;
-    int bit4 = (Operand2 & 0x00000010) >> 4;
-    int Rm = Operand2 & 0x0000000F;
-    int Rs = (Operand2 & 0x00000F00) >> 8;
-    if (bit4 == 0) 
-      switch (sh) {
-      case 0: cur = CURRENT_STATE.REGS[Rn] + 
-	  (CURRENT_STATE.REGS[Rm] << shamt5);
-	  break;
-      case 1: cur = CURRENT_STATE.REGS[Rn] + 
-	  (CURRENT_STATE.REGS[Rm] >> shamt5);
-	  break;
-      case 2: cur = CURRENT_STATE.REGS[Rn] + 
-	  (CURRENT_STATE.REGS[Rm] >> shamt5);
-    	  break;
-      case 3: cur = CURRENT_STATE.REGS[Rn] + 
-	      ((CURRENT_STATE.REGS[Rm] >> shamt5) |
-               (CURRENT_STATE.REGS[Rm] << (32 - shamt5)));
-	  break;
-      }     
-    else
-      switch (sh) {
-      case 0: cur = CURRENT_STATE.REGS[Rn] + 
-	  (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
-	  break;
-      case 1: cur = CURRENT_STATE.REGS[Rn] + 
-	  (CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]);
-	  break;
-      case 2: cur = CURRENT_STATE.REGS[Rn] + 
-	  (CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]);
-	  break;
-      case 3: cur = CURRENT_STATE.REGS[Rn] + 
-	      ((CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]) |
-               (CURRENT_STATE.REGS[Rm] << (32 - CURRENT_STATE.REGS[Rs])));
-	  break;
-      }      
-  }
-  if (I == 1) {
-    int rotate = Operand2 >> 8;
-    int Imm = Operand2 & 0x000000FF;
-    cur = CURRENT_STATE.REGS[Rn] + (Imm>>2*rotate|(Imm<<(32-2*rotate)));
-  }
-  NEXT_STATE.REGS[Rd] = cur;
-  if (S == 1) {
-    if (cur < 0)
-      NEXT_STATE.CPSR |= N_N;
-    if (cur == 0)
-      NEXT_STATE.CPSR |= Z_N;
-     if (cur /*if there is a carry*/)
-      NEXT_STATE.CPSR |= C_N;
-    if (cur /*if there is overflow*/)
-      NEXT_STATE.CPSR |= V_N;
-  }	
-  return 0;
-
-}
-
-
+//NEED TO WRITE THESE
 int ASR (char* i_);
+int LSL(char* i_);
+int LSR(char* i_)
+int ROR(char* i_);
+
 int B (char* i_);
-int BIC (char* i_);
 int BL (char* i_);
+
 int LDR (char* i_);
 int LDRB (char* i_);
-int LSL (char* i_);
-int LSR (char* i_);
+int STR(char* i_);
+int STRB(char* i_);
+
 int MLA (char* i_);
 int MUL (char* i_);
-int ROR (char* i_);
-int STR (char* i_);
-int STRB (char* i_);
-int SUB (char* i_);
-int TEQ (char* i_);
-int TST (char* i_);
+
 int SWI (char* i_){return 0;}
 
 #endif
