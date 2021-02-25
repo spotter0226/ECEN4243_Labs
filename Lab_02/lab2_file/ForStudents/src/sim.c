@@ -172,7 +172,7 @@ int data_process(char* i_) {
     return 0;
   }	
 
-
+  //TST
   TST
   if(!strcmp(d_opcode,"1000")) {
     printf("--- This is an TST instruction. \n");
@@ -216,16 +216,39 @@ int data_process(char* i_) {
   //SHIFTING
   if(!strcmp(d_opcode,"1101")) {
       //Needs more work
-    printf("--- This is an MOV instruction. \n");
-    MOV(Rd, Rn, Operand2, I, S, CC);
-    printf("--- This is an LSL instruction. \n");
-    LSL(Rd, Rn, Operand2, I, S, CC);
-    printf("--- This is an LSR instruction. \n");
-    LSR(Rd, Rn, Operand2, I, S, CC);
-    printf("--- This is an ASR instruction. \n");
-    ASR(Rd, Rn, Operand2, I, S, CC);
-    printf("--- This is an RAWR instruction. \n");
-    ROR(Rd, Rn, Operand2, I, S, CC);
+      if (I == 1)
+      {
+          printf("--- This is an MOV instruction. \n");
+          MOV(Rd, SBZ, Operand2, I, S, CC);
+      }
+
+      int f = operand2[7] - '0';
+      int s = operand2[6] - '0';
+      int h = operand2[5] - '0';
+      int se = operand2[4] - '0';
+
+      if (I == 0 && h == 1 && s == 0)
+      {
+          printf("--- This is an ASR instruction. \n");
+          ASR(Rd, SBZ, Operand2, I, S, CC);
+      }
+      else if (I == 0 && h == 1 && s == 1)
+      {
+          printf("--- This is an RAWR instruction. \n");
+          ROR(Rd, Rn, Operand2, I, S, CC);
+      }
+      else if (I == 0 && !strcmp(sh, "00"))
+      {
+          printf("--- This is an LSL instruction. \n");
+          LSL(Rd, Rn, Operand2, I, S, CC);
+      }
+      else if (I == 0 && !strcmp(sh, "01"))
+      {
+          printf("--- This is an LSR instruction. \n");
+          LSR(Rd, Rn, Operand2, I, S, CC);
+      }
+
+
     return 0;
   }	
 
@@ -251,8 +274,46 @@ int data_process(char* i_) {
 int branch_process(char* i_) {
   
   /* This function execute branch instruction */
+    char L[2];
+    L[0] = i_[7];
+    L[1] = '\0';
+
+    char d_cond[5];
+    d_cond[0] = i_[0];
+    d_cond[1] = i_[1];
+    d_cond[2] = i_[2];
+    d_cond[3] = i_[3];
+    d_cond[4] = '\0';
+
+    char offset[25]; 
+    offset[24] = '\0';
+    for (int i = 0, i < 24; i++)
+    {
+        offset[i] = i_[8 + i];
+    }
+
+
+    int L2 = bchar_to_int(L);
+    int offset2 = bchar_to_int(offset);
+    int CC = bchar_to_int(d_cond);
+    print("L = %d\noffset = %d\nCC: %d", L2, offset2, byte_to_binary4(CC));
 
   /* Add branch instructions here */ 
+    //B
+    if (L2 == 0)
+    {
+        printf("--- This is an B instruction. \n");
+        B(offset2m CC);
+        return 0;
+    }
+
+    //BL
+    if (L2 == 1)
+    {
+        printf("--- This is an BL instruction. \n");
+        BL(offset2m CC);
+        return 0;
+    }
 
   return 1;
 
