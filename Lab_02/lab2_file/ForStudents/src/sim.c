@@ -215,7 +215,7 @@ int data_process(char* i_) {
 
   //SHIFTING
   if(!strcmp(d_opcode,"1101")) {
-      //Needs more work
+    //MOV
       if (I == 1)
       {
           printf("--- This is an MOV instruction. \n");
@@ -226,22 +226,25 @@ int data_process(char* i_) {
       int s = operand2[6] - '0';
       int h = operand2[5] - '0';
       int se = operand2[4] - '0';
-
+      //ASR
       if (I == 0 && h == 1 && s == 0)
       {
           printf("--- This is an ASR instruction. \n");
           ASR(Rd, SBZ, Operand2, I, S, CC);
       }
+      //ROR
       else if (I == 0 && h == 1 && s == 1)
       {
           printf("--- This is an RAWR instruction. \n");
           ROR(Rd, Rn, Operand2, I, S, CC);
       }
+      //LSL
       else if (I == 0 && !strcmp(sh, "00"))
       {
           printf("--- This is an LSL instruction. \n");
           LSL(Rd, Rn, Operand2, I, S, CC);
       }
+      //LSR
       else if (I == 0 && !strcmp(sh, "01"))
       {
           printf("--- This is an LSR instruction. \n");
@@ -292,7 +295,6 @@ int branch_process(char* i_) {
         offset[i] = i_[8 + i];
     }
 
-
     int L2 = bchar_to_int(L);
     int offset2 = bchar_to_int(offset);
     int CC = bchar_to_int(d_cond);
@@ -303,7 +305,7 @@ int branch_process(char* i_) {
     if (L2 == 0)
     {
         printf("--- This is an B instruction. \n");
-        B(offset2m CC);
+        B(offset2, CC);
         return 0;
     }
 
@@ -311,7 +313,7 @@ int branch_process(char* i_) {
     if (L2 == 1)
     {
         printf("--- This is an BL instruction. \n");
-        BL(offset2m CC);
+        BL(offset2, CC);
         return 0;
     }
 

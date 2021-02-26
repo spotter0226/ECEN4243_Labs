@@ -732,42 +732,11 @@ int ORR (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
 }
 
-// MOV functions here 
-          //Help
+// MOV functions here -- NEEDS MORE WORK
 int MOV(int Rd, int Rn, int Operand2, int I, int S, int CC) {
 
     int cur = 0;
-    if (I == 0) {
-        int sh = (Operand2 & 0x00000060) >> 5;
-        int shamt5 = (Operand2 & 0x00000F80) >> 7;
-        int bit4 = (Operand2 & 0x00000010) >> 4;
-        int Rm = Operand2 & 0x0000000F;
-        int Rs = (Operand2 & 0x00000F00) >> 8;
-        if (bit4 == 0)
-            switch (sh) {
-            case 0: cur = CURRENT_STATE.REGS[Rm] << shamt5;
-                break;
-            case 1: cur = CURRENT_STATE.REGS[Rm] >> shamt5;
-                break;
-            case 2: cur = CURRENT_STATE.REGS[Rm] >> shamt5;
-                break;
-            case 3: cur = ((CURRENT_STATE.REGS[Rm] >> shamt5) +
-                (CURRENT_STATE.REGS[Rm] << (32 - shamt5)));
-                break;
-            }
-        else
-            switch (sh) {
-            case 0: cur = (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
-                break;
-            case 1: cur = (CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]);
-                break;
-            case 2: cur = (CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]);
-                break;
-            case 3: cur = ((CURRENT_STATE.REGS[Rm] >> CURRENT_STATE.REGS[Rs]) +
-                (CURRENT_STATE.REGS[Rm] << (32 - CURRENT_STATE.REGS[Rs])));
-                break;
-            }
-    }
+    
     if (I == 1) {
         int rotate = Operand2 >> 8;
         int Imm = Operand2 & 0x000000FF;
@@ -787,6 +756,51 @@ int MOV(int Rd, int Rn, int Operand2, int I, int S, int CC) {
     return 0;
 }
 
+//NEED TO WRITE THESE
+int ASR (int Rd, int Rn, int Operand2, int I, int S, int CC)
+{
+  if (I == 0) {
+        int sh = (Operand2 & 0x00000060) >> 5;
+        int shamt5 = (Operand2 & 0x00000F80) >> 7;
+        int bit4 = (Operand2 & 0x00000010) >> 4;
+        int Rm = Operand2 & 0x0000000F;
+        int Rs = (Operand2 & 0x00000F00) >> 8;
+        if (bit4 == 0)
+            {
+              //HELPITSNOTRIGHT
+              cur = (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
+            }
+        else
+            {
+              //STILLNOTRIGHT
+              cur = (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
+            }
+  NEXT_STATE.REGS[Rd] = cur;
+  if (S == 1) {
+     if (cur < 0)
+        NEXT_STATE.CPSR |= N_N;
+     if (cur == 0)
+        NEXT_STATE.CPSR |= Z_N;
+     if (cur /*if there is a carry*/)
+        NEXT_STATE.CPSR |= C_N;
+     if (cur /*if there is overflow*/)
+        NEXT_STATE.CPSR |= V_N;
+    }
+    return 0;
+    }
+}
+int LSL(int Rd, int Rn, int Operand2, int I, int S, int CC)
+{
+
+}
+int LSR(int Rd, int Rn, int Operand2, int I, int S, int CC)
+{
+
+}
+int ROR(int Rd, int Rn, int Operand2, int I, int S, int CC)
+{
+  
+}
 
 //MVN
 int MVN(int Rd, int Rn, int Operand2, int I, int S, int CC) {
@@ -906,11 +920,7 @@ int BIC (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 }
 
 
-//NEED TO WRITE THESE
-int ASR (char* i_);
-int LSL(char* i_);
-int LSR(char* i_);
-int ROR(char* i_);
+
 
 //B
 int B(int offset2, int CC)
