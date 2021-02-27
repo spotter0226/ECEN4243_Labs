@@ -804,19 +804,109 @@ int ASR (int Rd, int Rn, int Operand2, int I, int S, int CC)
 }
 
 int LSL(int Rd, int Rn, int Operand2, int I, int S, int CC) {
-  
-  return 0;
-}
+  if (I == 0)
+  {
+    int sh = (Operand2 & 0x00000060) >> 5;
+    int shamt5 = (Operand2 & 0x00000F80) >> 7;
+    int bit4 = (Operand2 & 0x00000010) >> 4;
+    int Rm = Operand2 & 0x0000000F;
+    int Rs = (Operand2 & 0x00000F00) >> 8;
+    if (bit4 == 0)
+    {
+      //HELPITSNOTRIGHT
+      cur = (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
+    }
+    else
+    {
+      //STILLNOTRIGHT
+      cur = (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
+    }
+    NEXT_STATE.REGS[Rd] = cur;
+    if (S == 1)
+    {
+      if (cur < 0)
+        NEXT_STATE.CPSR |= N_N;
+      if (cur == 0)
+        NEXT_STATE.CPSR |= Z_N;
+      if (cur /*if there is overflow*/)
+        NEXT_STATE.CPSR |= V_N;
+      else
+      {
+        NEXT_STATE.CPSR |= C_N;
+      }
+    }
+    return 0;
+  }
 
 int LSR(int Rd, int Rn, int Operand2, int I, int S, int CC) {
-  
-  return 0;
-}
+  if (I == 0)
+  {
+    int sh = (Operand2 & 0x00000060) >> 5;
+    int shamt5 = (Operand2 & 0x00000F80) >> 7;
+    int bit4 = (Operand2 & 0x00000010) >> 4;
+    int Rm = Operand2 & 0x0000000F;
+    int Rs = (Operand2 & 0x00000F00) >> 8;
+    if (bit4 == 0)
+    {
+      //HELPITSNOTRIGHT
+      cur = (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
+    }
+    else
+    {
+      //STILLNOTRIGHT
+      cur = (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
+    }
+    NEXT_STATE.REGS[Rd] = cur;
+    if (S == 1)
+    {
+      if (cur < 0)
+        NEXT_STATE.CPSR |= N_N;
+      if (cur == 0)
+        NEXT_STATE.CPSR |= Z_N;
+      if (cur /*if there is overflow*/)
+        NEXT_STATE.CPSR |= V_N;
+      else
+      {
+        NEXT_STATE.CPSR |= C_N;
+      }
+    }
+    return 0;
+  }
 
 int ROR(int Rd, int Rn, int Operand2, int I, int S, int CC) {
-  
-  return 0;
-}
+  if (I == 0)
+  {
+    int sh = (Operand2 & 0x00000060) >> 5;
+    int shamt5 = (Operand2 & 0x00000F80) >> 7;
+    int bit4 = (Operand2 & 0x00000010) >> 4;
+    int Rm = Operand2 & 0x0000000F;
+    int Rs = (Operand2 & 0x00000F00) >> 8;
+    if (bit4 == 0)
+    {
+      //HELPITSNOTRIGHT
+      cur = (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
+    }
+    else
+    {
+      //STILLNOTRIGHT
+      cur = (CURRENT_STATE.REGS[Rm] << CURRENT_STATE.REGS[Rs]);
+    }
+    NEXT_STATE.REGS[Rd] = cur;
+    if (S == 1)
+    {
+      if (cur < 0)
+        NEXT_STATE.CPSR |= N_N;
+      if (cur == 0)
+        NEXT_STATE.CPSR |= Z_N;
+      if (cur /*if there is overflow*/)
+        NEXT_STATE.CPSR |= V_N;
+      else
+      {
+        NEXT_STATE.CPSR |= C_N;
+      }
+    }
+    return 0;
+  }
 
 //MVN
 int MVN(int Rd, int Rn, int Operand2, int I, int S, int CC) {
@@ -958,8 +1048,8 @@ int LDRB (char* i_);
 int STR(char* i_);
 int STRB(char* i_);
 
-int MLA (char* i_);
-int MUL (char* i_);
+//int MLA (char* i_); Don't worry about these right now
+//int MUL (char* i_); Don't worry about these right now
 
 int SWI (char* i_){return 0;}
 
