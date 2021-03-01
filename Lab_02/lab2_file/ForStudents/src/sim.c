@@ -69,6 +69,8 @@ int bchar_to_int(char* rsa) {
   return result;
 }
 
+//Register set to 0
+int SBZ = 0;
 
 int data_process(char* i_) {
 
@@ -239,13 +241,13 @@ int data_process(char* i_) {
           ROR(Rd, Rn, Operand2, I, S, CC);
       }
       //LSL
-      else if (I == 0 && !strcmp(sh, "00"))
+      else if (I == 0 && h == 0 && s == 0)
       {
           printf("--- This is an LSL instruction. \n");
           LSL(Rd, Rn, Operand2, I, S, CC);
       }
       //LSR
-      else if (I == 0 && !strcmp(sh, "01"))
+      else if (I == 0 && h == 0 && s == 1))
       {
           printf("--- This is an LSR instruction. \n");
           LSR(Rd, Rn, Operand2, I, S, CC);
@@ -325,7 +327,8 @@ int mul_process(char* i_) {
 
   /* This function execute multiply instruction */
 
-  /* Add multiply instructions here */ 
+  /* Add multiply instructions here */
+    /* Dont need to do -- EC*/
 
   return 1;
 
@@ -335,7 +338,92 @@ int transfer_process(char* i_) {
 
   /* This function execute memory instruction */
 
+    char d_cond[5];
+    d_cond[0] = i_[0];
+    d_cond[1] = i_[1];
+    d_cond[2] = i_[2];
+    d_cond[3] = i_[3];
+    d_cond[4] = '\0';
+
+    //i = Immediate
+    char i[2]; i[0] = i_[6]; i[1] = '\0';
+
+    //P = 0: post-indexed addressing; P = 1: offset addressing
+    char p[2]; p[0] = i_[7]; p[1] = '\0';
+
+    //U = 1: offset added; U = 0: offset subtracted from base
+    char u[2]; u[0] = i_[8]; u[1] = '\0';
+
+    //W = 0 for P = 0: LDR, LDRB, STR, STRB and normal memory access; W = 1: LDRBT, LDRT,STRBT, STRT and unpriviledged memory access
+    //W = 0 for P = 1: base register is not updated; W = 1: calculated memory address is written back to the base
+    char w[2]; w[0] = i_[10]; w[1] = '\0';
+
+    //L = 1: Load; L = 0: Store
+    char l[2]; l[0] = i_[11]; l[1] = '\0';
+
+    //B = 1: Unsigned byte; B = 0: word access
+    char b[2]; b[0] = i_[9]; b[1] = '\0';
+
+    char src2[13]; src2[12] = '0';
+
+    //Registers
+    char rn[5]; rn[4] = '\0';
+    char rd[5]; rd[4] = '\0';
+
+    for (int i = 0; i < 4; i++)
+    {
+        rn[i] = i_[12 + i];
+        rd[i] = i_[16 + i];
+    }
+    for (int i = 0; i < 12; i++)
+    {
+        src2[i] = i_[20 + i];
+    }
+
+    int CC = bchar_to_int(d_cond);
+    int I = bchar_to_int(i);
+    int L = bchar_to_int(l);
+    int B = bchar_to_int(b);
+    int U = bchar_to_int(u);
+    int P = bchar_to_int(p);
+    int W = bchar_to_int(w);
+    int Rn = bchar_to_int(rn);
+    int Rd = bchar_to_int(rd);
+    int Src2 = bchar_to_int(src2);
+
   /* Add memory instructions here */ 
+
+  //STR
+    if (L == 0 && B == 0)
+    {
+        printf("--- This is an STR instruction. \n");
+        STR(Rd, Rn, I, P, U, W, Src2, CC);
+        return 0;
+    }
+
+  //STRB
+    if (L == 0 && B == 1)
+    {
+        printf("--- This is an STRB instruction. \n");
+        STRB(Rd, Rn, I, P, U, W, Src2, CC);
+        return 0;
+    }
+
+    //LDR
+    if (L == 1 && B == 0)
+    {
+        printf("--- This is an LDR instruction. \n");
+        LDR(Rd, Rn, I, P, U, W, Src2, CC);
+        return 0;
+    }
+
+    //LDRB
+    if (L == 1 && B == 1)
+    {
+        printf("--- This is an LDRB instruction. \n");
+        STRB(Rd, Rn, I, P, U, W, Src2, CC);
+        return 0;
+    }
 
   return 1;
 
