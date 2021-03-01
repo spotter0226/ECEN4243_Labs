@@ -216,11 +216,12 @@ int data_process(char* i_) {
 
   //SHIFTING
   if(!strcmp(d_opcode,"1101")) {
-    //MOV
+      //MOV
       if (I == 1)
       {
-          printf("--- This is an MOV instruction. \n");
-          MOV(Rd, Rn, Operand2, I, S, CC);
+        printf("--- This is an MOV instruction. \n");
+        MOV(Rd, Rn, Operand2, I, S, CC);
+        return 0;
       }
 
       int f = operand2[7] - '0';
@@ -233,25 +234,29 @@ int data_process(char* i_) {
 	  {
 		  printf("--- This is an LSL instruction. \n");
 		  LSL(Rd, Rn, Operand2, I, S, CC);
+      return 0;
 	  }
 	  //LSR
-	  if (I == 0 && h == 0 && s == 1))
+	  if (I == 0 && h == 0 && s == 1)
 	  {
-	  printf("--- This is an LSR instruction. \n");
-	  LSR(Rd, Rn, Operand2, I, S, CC);
+      printf("--- This is an LSR instruction. \n");
+      LSR(Rd, Rn, Operand2, I, S, CC);
+      return 0;
 	  }
-      //ASR
-      if (I == 0 && h == 1 && s == 0)
-      {
-          printf("--- This is an ASR instruction. \n");
-          ASR(Rd, Rn, Operand2, I, S, CC);
-      }
-      //ROR
-      if (I == 0 && h == 1 && s == 1)
-      {
-          printf("--- This is an RAWR instruction. \n");
-          ROR(Rd, Rn, Operand2, I, S, CC);
-      }
+    //ASR
+    if (I == 0 && h == 1 && s == 0)
+    {
+      printf("--- This is an ASR instruction. \n");
+      ASR(Rd, Rn, Operand2, I, S, CC);
+      return 0;
+    }
+    //ROR
+    if (I == 0 && h == 1 && s == 1)
+    {
+      printf("--- This is an RAWR instruction. \n");
+      ROR(Rd, Rn, Operand2, I, S, CC);
+      return 0;
+    }
 
 
     return 0;

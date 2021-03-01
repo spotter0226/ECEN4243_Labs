@@ -756,8 +756,7 @@ int MOV(int Rd, int Rn, int Operand2, int I, int S, int CC) {
 }
 
 //NEED TO WRITE THESE
-int ASR (int Rd, int Rn, int Operand2, int I, int S, int CC)
-{
+int ASR (int Rd, int Rn, int Operand2, int I, int S, int CC) {
   int cur = 0;
   if (I == 0) {
         int sh = (Operand2 & 0x00000060) >> 5;
@@ -787,6 +786,7 @@ int ASR (int Rd, int Rn, int Operand2, int I, int S, int CC)
         NEXT_STATE.CPSR |= C_N;
     return 0;
     }
+  }
 }
 
 int LSL(int Rd, int Rn, int Operand2, int I, int S, int CC) {
@@ -822,6 +822,7 @@ int LSL(int Rd, int Rn, int Operand2, int I, int S, int CC) {
     }
     return 0;
   }
+}
 
 int LSR(int Rd, int Rn, int Operand2, int I, int S, int CC) {
  int cur = 0;
@@ -1016,20 +1017,45 @@ int BIC (int Rd, int Rn, int Operand2, int I, int S, int CC) {
 //B
 int B(int offset2, int CC)
 {
-    CURRENT_STATE.REGS[15] = (CURRENT_STATE.REGS[15] + 8) + (offset2 << 2);
+  CURRENT_STATE.REGS[15] = (CURRENT_STATE.REGS[15] + 8) + (offset2 << 2);
+  return 0;
 }
 
 //BL
 int BL(int offset2, int CC)
 {
-    CURRENT_STATE.REGS[14] = (CURRENT_STATE.REGS[15] + 8) - 4;
-    CURRENT_STATE.REGS[15] = (CURRENT_STATE.REGS[15] + 8) + (offset2 << 2);
+  CURRENT_STATE.REGS[14] = (CURRENT_STATE.REGS[15] + 8) - 4;
+  CURRENT_STATE.REGS[15] = (CURRENT_STATE.REGS[15] + 8) + (offset2 << 2);
+  return 0;
 }
 
-int LDR (char* i_);
-int LDRB (char* i_);
-int STR(char* i_);
-int STRB(char* i_);
+//LDR
+int LDR(Rd, Rn, I, P, U, W, Src2, CC)
+{
+  
+  return 0;
+}
+
+//LDRB
+int LDRB(Rd, Rn, I, P, U, W, Src2, CC)
+{
+
+  return 0;
+}
+
+//STR
+int STR(Rd, Rn, I, P, U, W, Src2, CC)
+{
+
+  return 0;
+}
+
+//STRB
+int STRB(Rd, Rn, I, P, U, W, Src2, CC)
+{
+
+  return 0;
+}
 
 //int MLA (char* i_); Don't worry about these right now
 //int MUL (char* i_); Don't worry about these right now
