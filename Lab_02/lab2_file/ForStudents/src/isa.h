@@ -87,6 +87,7 @@ int ADD (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= V_N;
     if (cur > 0xFFFFFFFF) 
       NEXT_STATE.CPSR |= C_N;
+  }
   return 0;
 
 }
@@ -150,7 +151,7 @@ int AND (int Rd, int Rn, int Operand2, int I, int S, int CC) {
       NEXT_STATE.CPSR |= V_N;
     if (cur > 0xFFFFFFFF) 
       NEXT_STATE.CPSR |= C_N;
-
+  }
   return 0;
 }
 
@@ -213,7 +214,7 @@ int EOR (int Rd, int Rn, int Operand2, int I, int S, int CC) {
           NEXT_STATE.CPSR |= V_N;
       if (cur > 0xFFFFFFFF)     
           NEXT_STATE.CPSR |= C_N;
-    
+  }  
   return 0;
 
 }
@@ -277,6 +278,7 @@ int SUB (int Rd, int Rn, int Operand2, int I, int S, int CC) {
           NEXT_STATE.CPSR |= V_N;
       if (cur > 0xFFFFFFFF)
         NEXT_STATE.CPSR |= C_N;
+  }
   return 0;
 
 }
@@ -340,6 +342,7 @@ int ADC (int Rd, int Rn, int Operand2, int I, int S, int CC) {
           NEXT_STATE.CPSR |= V_N;
       if (cur > 0xFFFFFFFF)
         NEXT_STATE.CPSR |= C_N;
+  }
   return 0;
 
 }
@@ -403,6 +406,7 @@ int SBC (int Rd, int Rn, int Operand2, int I, int S, int CC) {
           NEXT_STATE.CPSR |= V_N;
       if (cur > 0xFFFFFFFF)
         NEXT_STATE.CPSR |= C_N;
+  }
   return 0;
 
 }
@@ -466,6 +470,7 @@ int TST (int Rd, int Rn, int Operand2, int I, int S, int CC) {
           NEXT_STATE.CPSR |= V_N;
       if (cur > 0xFFFFFFFF)
         NEXT_STATE.CPSR |= C_N;
+  }
   return 0;
 
 }
@@ -529,6 +534,7 @@ int TEQ (int Rd, int Rn, int Operand2, int I, int S, int CC) {
           NEXT_STATE.CPSR |= V_N;
       if (cur > 0xFFFFFFFF)
         NEXT_STATE.CPSR |= C_N;
+  }
   return 0;
 
 }
@@ -592,6 +598,7 @@ int CMP (int Rd, int Rn, int Operand2, int I, int S, int CC) {
           NEXT_STATE.CPSR |= V_N;
       if (cur > 0xFFFFFFFF)
         NEXT_STATE.CPSR |= C_N;
+  }
   return 0;
 
 }
@@ -655,6 +662,7 @@ int CMN (int Rd, int Rn, int Operand2, int I, int S, int CC) {
           NEXT_STATE.CPSR |= V_N;
       if (cur > 0xFFFFFFFF)
         NEXT_STATE.CPSR |= C_N;
+  }
   return 0;
 
 }
@@ -718,6 +726,7 @@ int ORR (int Rd, int Rn, int Operand2, int I, int S, int CC) {
           NEXT_STATE.CPSR |= V_N;
       if (cur > 0xFFFFFFFF)
         NEXT_STATE.CPSR |= C_N;
+  }
   return 0;
 
 }
@@ -742,6 +751,7 @@ int MOV(int Rd, int Rn, int Operand2, int I, int S, int CC) {
           NEXT_STATE.CPSR |= V_N;
       if (cur > 0xFFFFFFFF)
         NEXT_STATE.CPSR |= C_N;
+  }
   return 0;
 }
 
@@ -843,7 +853,7 @@ int LSR(int Rd, int Rn, int Operand2, int I, int S, int CC) {
         if (cur > 0xFFFFFFFF) 
           NEXT_STATE.CPSR |= C_N;
 
-    
+    }
     return 0;
   }
 }
@@ -881,6 +891,7 @@ int ROR(int Rd, int Rn, int Operand2, int I, int S, int CC) {
     }
     return 0;
   }
+}
 
 //MVN
 int MVN(int Rd, int Rn, int Operand2, int I, int S, int CC) {
