@@ -257,8 +257,6 @@ int data_process(char* i_) {
       ROR(Rd, Rn, Operand2, I, S, CC);
       return 0;
     }
-
-
     return 0;
   }	
 
