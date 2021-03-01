@@ -194,7 +194,7 @@ int data_process(char* i_) {
   //CMP
   if(!strcmp(d_opcode,"1010")) {
     printf("--- This is an CMP instruction. \n");
-    CMP(Rd, Rn, Operand2, I, S, CC);
+    CMP(SBZ, Rn, Operand2, I, 1, CC);
     return 0;
   }	
 
@@ -202,7 +202,7 @@ int data_process(char* i_) {
   //CMN
   if(!strcmp(d_opcode,"1011")) {
     printf("--- This is an CMN instruction. \n");
-    CMN(Rd, Rn, Operand2, I, S, CC);
+    CMN(SBZ, Rn, Operand2, I, 1, CC);
     return 0;
   }	
 
@@ -228,6 +228,19 @@ int data_process(char* i_) {
       int s = operand2[6] - '0';
       int h = operand2[5] - '0';
       int se = operand2[4] - '0';
+
+	  //LSL
+	  if (I == 0 && h == 0 && s == 0)
+	  {
+		  printf("--- This is an LSL instruction. \n");
+		  LSL(Rd, Rn, Operand2, I, S, CC);
+	  }
+	  //LSR
+	  if (I == 0 && h == 0 && s == 1))
+	  {
+	  printf("--- This is an LSR instruction. \n");
+	  LSR(Rd, Rn, Operand2, I, S, CC);
+	  }
       //ASR
       if (I == 0 && h == 1 && s == 0)
       {
@@ -235,22 +248,10 @@ int data_process(char* i_) {
           ASR(Rd, SBZ, Operand2, I, S, CC);
       }
       //ROR
-      else if (I == 0 && h == 1 && s == 1)
+      if (I == 0 && h == 1 && s == 1)
       {
           printf("--- This is an RAWR instruction. \n");
           ROR(Rd, Rn, Operand2, I, S, CC);
-      }
-      //LSL
-      else if (I == 0 && h == 0 && s == 0)
-      {
-          printf("--- This is an LSL instruction. \n");
-          LSL(Rd, Rn, Operand2, I, S, CC);
-      }
-      //LSR
-      else if (I == 0 && h == 0 && s == 1))
-      {
-          printf("--- This is an LSR instruction. \n");
-          LSR(Rd, Rn, Operand2, I, S, CC);
       }
 
 
@@ -269,7 +270,7 @@ int data_process(char* i_) {
   //MVN
   if(!strcmp(d_opcode,"1111")) {
     printf("--- This is an MVN instruction. \n");
-    MVN(Rd, Rn, Operand2, I, S, CC);
+    MVN(Rd, SBZ, Operand2, I, S, CC);
     return 0;
   }	
 
