@@ -246,15 +246,7 @@ int data_process(char* i_) {
           LSL(Rd, Rn, Operand2, I, S, CC);
       }
       //LSR
-<<<<<<< HEAD
-<<<<<<< HEAD
-      else if (I == 0 && h == 0 && s == 1)
-=======
       else if (I == 0 && h == 0 && s == 1))
->>>>>>> b86e5a04f3f401549e051f4f635a989a5993fe16
-=======
-      else if (I == 0 && h == 0 && s == 1))
->>>>>>> b86e5a04f3f401549e051f4f635a989a5993fe16
       {
           printf("--- This is an LSR instruction. \n");
           LSR(Rd, Rn, Operand2, I, S, CC);
