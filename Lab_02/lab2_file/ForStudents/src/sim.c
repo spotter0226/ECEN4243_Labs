@@ -175,7 +175,6 @@ int data_process(char* i_) {
   }	
 
   //TST
-  TST
   if(!strcmp(d_opcode,"1000")) {
     printf("--- This is an TST instruction. \n");
     TST(Rd, Rn, Operand2, I, S, CC);
@@ -221,7 +220,7 @@ int data_process(char* i_) {
       if (I == 1)
       {
           printf("--- This is an MOV instruction. \n");
-          MOV(Rd, SBZ, Operand2, I, S, CC);
+          MOV(Rd, Rn, Operand2, I, S, CC);
       }
 
       int f = operand2[7] - '0';
@@ -245,7 +244,7 @@ int data_process(char* i_) {
       if (I == 0 && h == 1 && s == 0)
       {
           printf("--- This is an ASR instruction. \n");
-          ASR(Rd, SBZ, Operand2, I, S, CC);
+          ASR(Rd, Rn, Operand2, I, S, CC);
       }
       //ROR
       if (I == 0 && h == 1 && s == 1)
@@ -283,6 +282,7 @@ int branch_process(char* i_) {
     char L[2];
     L[0] = i_[7];
     L[1] = '\0';
+    int i = 0;
 
     char d_cond[5];
     d_cond[0] = i_[0];
@@ -293,7 +293,7 @@ int branch_process(char* i_) {
 
     char offset[25]; 
     offset[24] = '\0';
-    for (int i = 0, i < 24; i++)
+    for (i = 0; i < 24; i++);
     {
         offset[i] = i_[8 + i];
     }
@@ -301,7 +301,7 @@ int branch_process(char* i_) {
     int L2 = bchar_to_int(L);
     int offset2 = bchar_to_int(offset);
     int CC = bchar_to_int(d_cond);
-    print("L = %d\noffset = %d\nCC: %d", L2, offset2, byte_to_binary4(CC));
+    printf("L = %d\noffset = %d\nCC: %d", L2, offset2, byte_to_binary4(CC));
 
   /* Add branch instructions here */ 
     //B
