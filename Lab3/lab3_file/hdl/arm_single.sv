@@ -200,26 +200,26 @@ module decoder (input  logic [1:0] Op,
    always_comb
      if (ALUOp)
        begin                 // which DP Instr?
-         case(Funct[4:1]) 
-           4'b0100: ALUControl = 2'b00; // ADD
-           4'b0010: ALUControl = 2'b01; // SUB
-           4'b0000: ALUControl = 2'b10; // AND
-           4'b1100: ALUControl = 2'b11; // ORR
-           //ADC
-           //ASR
-           //BIC
-           //CMN
-           //CMP
-           //EOR
-           //LSL
-           //LSR
-           //MOV
-           //MVN
-           //ROR
-           //SBC
-           //TEQ
-           //TST
-           default: ALUControl = 2'bx;  // unimplemented
+         case(Funct[5:1]) 
+           5'b0_0000: ALUControl = 5'b0_0000; // ADD
+           5'b0_0001: ALUControl = 5'b0_0001; // SUB
+           5'b0_0010: ALUControl = 5'b0_0010; // AND
+           5'b0_0011: ALUControl = 5'b0_0011; // ORR
+           5'b0_0100: ALUControl = 5'b0_0100; // ADC
+           5'b0_0101: ALUControl = 5'b0_0101; // ASR
+           5'b0_0110: ALUControl = 5'b0_0110; // BIC
+           5'b0_0111: ALUControl = 5'b0_0111; // CMN
+           5'b0_1000: ALUControl = 5'b0_1000; // CMP
+           5'b0_1001: ALUControl = 5'b0_1001; // EOR
+           5'b0_1010: ALUControl = 5'b0_1010; // LSL
+           5'b0_1011: ALUControl = 5'b0_1011; // LSR
+           5'b0_1100: ALUControl = 5'b0_1100; // MOV
+           5'b0_1101: ALUControl = 5'b0_1101; // MVN
+           5'b0_1110: ALUControl = 5'b0_1110; // ROR
+           5'b0_1111: ALUControl = 5'b0_1111; // SBC
+           5'b1_0000: ALUControl = 5'b1_0000; // TEQ
+           5'b1_0001: ALUControl = 5'b1_0001; // TST
+           default: ALUControl = 5'bx;  // unimplemented
          endcase
          // update flags if S bit is set 
          // (C & V only updated for arith instructions)
@@ -478,10 +478,25 @@ module alu (input  logic [31:0] a, b,
    assign sum = a + condinvb + ALUControl[0];
 
    always_comb
-     casex (ALUControl[1:0])
-       2'b0?:  Result = sum;
-       2'b10:  Result = a & b;
-       2'b11:  Result = a | b;
+     casex (ALUControl[5:0])
+       5'b0_0000:  Result = sum; // ADD  
+       5'b0_0001:  Result = a - b; // SUB
+       5'b0_0010:  Result = a & b; // AND 
+       5'b0_0011:  Result = a | b; // ORR
+       //5'b0_0100:  Result = ; // ADC
+       5'b0_0101:  Result = a >>> b; // ASR
+       //5'b0_0110:  Result = ; // BIC
+       //5'b0_0111:  Result = ; // CMN
+       //5'b0_1000:  Result = ; // CMP
+       //5'b0_1001:  Result = a ^ b; // EOR
+       //5'b0_1010:  Result = ; // LSL
+       //5'b0_1011:  Result = ; // LSR
+       //5'b0_1100:  Result = ; // MOV
+       //5'b0_1101:  Result = ; // MVN
+       //5'b0_1110:  Result = ; // ROR
+       //5'b0_1111:  Result = ; // SBC
+       //5'b1_0000:  Result = ; // TEQ
+       //5'b1_0001:  Result = ; // TST
        default: Result = 32'bx;
      endcase
 
