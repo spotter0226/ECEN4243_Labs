@@ -479,24 +479,24 @@ module alu (input  logic [31:0] a, b,
 
    always_comb
      casex (ALUControl[5:0])
-       5'b0_0000:  Result = sum; // ADD  
-       5'b0_0001:  Result = a - b; // SUB
-       5'b0_0010:  Result = a & b; // AND 
-       5'b0_0011:  Result = a | b; // ORR
-       //5'b0_0100:  Result = ; // ADC
-       5'b0_0101:  Result = a >>> b; // ASR
-       //5'b0_0110:  Result = ; // BIC
-       //5'b0_0111:  Result = ; // CMN
-       //5'b0_1000:  Result = ; // CMP
-       //5'b0_1001:  Result = a ^ b; // EOR
-       //5'b0_1010:  Result = ; // LSL
-       //5'b0_1011:  Result = ; // LSR
-       //5'b0_1100:  Result = ; // MOV
-       //5'b0_1101:  Result = ; // MVN
-       //5'b0_1110:  Result = ; // ROR
-       //5'b0_1111:  Result = ; // SBC
-       //5'b1_0000:  Result = ; // TEQ
-       //5'b1_0001:  Result = ; // TST
+       5'b0_000?:  Result = sum; // ADD Rn + Src2 and SUB Rn - Src2
+       //5'b0_0001:  Result = a - b; // SUB Rn - Src2
+       5'b0_0010:  Result = a & b; // AND Rn & Src2
+       5'b0_0011:  Result = a | b; // ORR Rn | Src2
+       //5'b0_0100:  Result = a + b + carry; // ADC Rn + Src2 + C
+       //5'b0_0101:  Result = a >>> b; // ASR Rm >>> Src2
+       5'b0_0110:  Result = a & ~b; // BIC Rn & ~Src2
+       //5'b0_0111:  Result = ; // CMN Rn + Src2 (compare negative and set flags)
+       //5'b0_1000:  Result = ; // CMP Rn - Src2 (set flags based on this)
+       5'b0_1001:  Result = a ^ b; // EOR Rn ^ Src2
+       //5'b0_1010:  Result = ; // LSL Rm << Src2
+       //5'b0_1011:  Result = ; // LSR Rm >> Src2
+       5'b0_1100:  Result = b; // MOV Rd = Src2
+       5'b0_1101:  Result = ~a; // MVN Rd = ~Rn
+       //5'b0_1110:  Result = ; // ROR Rn ror Src2
+       //5'b0_1111:  Result = a - b - ~carry; // SBC Rn - Src2 - ~C
+       //5'b1_0000:  Result = ; // TEQ Rn ^ Src2 (test that, then set flags)
+       //5'b1_0001:  Result = ; // TST Rn & Src2 (test, then set flags)
        default: Result = 32'bx;
      endcase
 
