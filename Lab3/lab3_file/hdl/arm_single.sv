@@ -86,7 +86,8 @@ module arm (input  logic        clk, reset,
    logic [3:0] ALUFlags;
    logic       RegWrite, ALUSrc, MemtoReg, PCSrc;
    logic [2:0] RegSrc;   
-   logic [1:0] ImmSrc, ALUControl;
+   logic [1:0] ImmSrc;
+   logic [4:0] ALUControl;
    
    controller c (.clk(clk),
                  .reset(reset),
@@ -127,7 +128,7 @@ module controller (input  logic         clk, reset,
                    output logic         RegWrite,
                    output logic [ 1:0]  ImmSrc,
                    output logic         ALUSrc, 
-                   output logic [ 1:0]  ALUControl,
+                   output logic [ 4:0]  ALUControl,
                    output logic         MemWrite, MemtoReg,
                    output logic         PCSrc,
                    output logic         MemStrobe);
@@ -167,7 +168,8 @@ module decoder (input  logic [1:0] Op,
                 output logic [1:0] FlagW,
                 output logic       PCS, RegW, MemW,
                 output logic       MemtoReg, ALUSrc,
-                output logic [1:0] ImmSrc, ALUControl,
+                output logic [1:0] ImmSrc, 
+                output logic [4:0] ALUControl,
                 output logic [2:0] RegSrc,
                 output logic       MemStrobe);
    
@@ -200,25 +202,27 @@ module decoder (input  logic [1:0] Op,
    always_comb
      if (ALUOp)
        begin                 // which DP Instr?
-         case(Funct[5:1]) 
-           5'b0_0000: ALUControl = 5'b0_0000; // ADD
-           5'b0_0001: ALUControl = 5'b0_0001; // SUB
-           5'b0_0010: ALUControl = 5'b0_0010; // AND
-           5'b0_0011: ALUControl = 5'b0_0011; // ORR
-           5'b0_0100: ALUControl = 5'b0_0100; // ADC
-           5'b0_0101: ALUControl = 5'b0_0101; // ASR
-           5'b0_0110: ALUControl = 5'b0_0110; // BIC
-           5'b0_0111: ALUControl = 5'b0_0111; // CMN
-           5'b0_1000: ALUControl = 5'b0_1000; // CMP
-           5'b0_1001: ALUControl = 5'b0_1001; // EOR
-           5'b0_1010: ALUControl = 5'b0_1010; // LSL
-           5'b0_1011: ALUControl = 5'b0_1011; // LSR
-           5'b0_1100: ALUControl = 5'b0_1100; // MOV
-           5'b0_1101: ALUControl = 5'b0_1101; // MVN
-           5'b0_1110: ALUControl = 5'b0_1110; // ROR
-           5'b0_1111: ALUControl = 5'b0_1111; // SBC
-           5'b1_0000: ALUControl = 5'b1_0000; // TEQ
-           5'b1_0001: ALUControl = 5'b1_0001; // TST
+         case(Funct[4:0]) 
+           4'b0100: ALUControl = 5'b00000; // ADD--
+           4'b0010: ALUControl = 5'b00001; // SUB--
+           4'b0000: ALUControl = 5'b00010; // AND--
+           4'b1100: ALUControl = 5'b00011; // ORR--
+           4'b0101: ALUControl = 5'b01100; // ADC--
+           4'b1110: ALUControl = 5'b00110; // BIC--
+           4'b1011: ALUControl = 5'b00000; // CMN--
+           4'b1010: ALUControl = 5'b00001; // CMP--
+           4'b0001: ALUControl = 5'b00111; // EOR--
+           4'b1101: ALUControl = 5'b10000; // MOV, LSL, LSR, ASR, ROR--
+           //4'b1101: ALUControl = 5'b10001; // LSL
+           //4'b1101: ALUControl = 5'b10010; // LSR
+           //4'b1101: ALUControl = 5'b10011; // ASR
+           //4'b1101: ALUControl = 5'b10100; // ROR
+           4'b1111: ALUControl = 5'b00001; // MVN--
+           4'b0110: ALUControl = 5'b00101; // SBC--
+           4'b0011: ALUControl = 5'b01101; // RSB--
+           4'b0111: ALUControl = 5'b01000; // RSC--
+           4'b1001: ALUControl = 5'b00111; // TEQ--
+           4'b1000: ALUControl = 5'b00010; // TST--
            default: ALUControl = 5'bx;  // unimplemented
          endcase
          // update flags if S bit is set 
@@ -308,7 +312,7 @@ module datapath (input  logic        clk, reset,
                  input  logic        RegWrite,
                  input  logic [ 1:0]  ImmSrc,
                  input  logic        ALUSrc,
-                 input  logic [ 1:0]  ALUControl,
+                 input  logic [ 4:0]  ALUControl,
                  input  logic        MemtoReg,
                  input  logic        PCSrc,
                  output logic [ 3:0]  ALUFlags,
@@ -466,7 +470,9 @@ module mux2 #(parameter WIDTH = 8)
 endmodule // mux2
 
 module alu (input  logic [31:0] a, b,
-            input  logic [ 1:0] ALUControl,
+            input  logic [ 4:0] ALUControl,
+            input  logic I, //immediate
+            input  logic [1:0] sh, //shift operations
             output logic [31:0] Result,
             output logic [ 3:0] ALUFlags);
    
@@ -478,34 +484,67 @@ module alu (input  logic [31:0] a, b,
    assign sum = a + condinvb + ALUControl[0];
 
    always_comb
-     casex (ALUControl[5:0])
-       5'b0_000?:  Result = sum; // ADD Rn + Src2 and SUB Rn - Src2
+     casex (ALUControl[4:0])
+       5'b0000?:  Result = sum; // ADD Rn + Src2, SUB Rn - Src2, CMP, CMN, MOV, MVN
+       
+       /*LOGIC NOT RIGHT
        //5'b0_0001:  Result = a - b; // SUB Rn - Src2
-       5'b0_0010:  Result = a & b; // AND Rn & Src2
-       5'b0_0011:  Result = a | b; // ORR Rn | Src2
+       //5'b0_0010:  Result = a && b; // AND Rn & Src2
+       //5'b0_0011:  Result = a || b; // ORR Rn | Src2
        //5'b0_0100:  Result = a + b + carry; // ADC Rn + Src2 + C
        //5'b0_0101:  Result = a >>> b; // ASR Rm >>> Src2
-       5'b0_0110:  Result = a & ~b; // BIC Rn & ~Src2
+       //5'b0_0110:  Result = a && ~b; // BIC Rn & ~Src2
        //5'b0_0111:  Result = ; // CMN Rn + Src2 (compare negative and set flags)
        //5'b0_1000:  Result = ; // CMP Rn - Src2 (set flags based on this)
-       5'b0_1001:  Result = a ^ b; // EOR Rn ^ Src2
+       //5'b0_1001:  Result = a ^ b; // EOR Rn ^ Src2
        //5'b0_1010:  Result = ; // LSL Rm << Src2
        //5'b0_1011:  Result = ; // LSR Rm >> Src2
-       5'b0_1100:  Result = b; // MOV Rd = Src2
-       5'b0_1101:  Result = ~a; // MVN Rd = ~Rn
+       //5'b0_1100:  Result = b; // MOV Rd = Src2
+       //5'b0_1101:  Result = ~a; // MVN Rd = ~Rn
        //5'b0_1110:  Result = ; // ROR Rn ror Src2
        //5'b0_1111:  Result = a - b - ~carry; // SBC Rn - Src2 - ~C
        //5'b1_0000:  Result = ; // TEQ Rn ^ Src2 (test that, then set flags)
-       //5'b1_0001:  Result = ; // TST Rn & Src2 (test, then set flags)
+       //5'b1_0001:  Result = ; // TST Rn & Src2 (test, then set flags)*/
+
+       5'b10000:
+       begin
+         if (I == 1) //MOV
+         {
+           Result = b;
+         }
+         else
+           begin
+             casex (sh)
+              2'b00: Result = a << b; //LSL
+              2'b01: Result = a >> b; //LSR
+              2'b10: Result = a >>> b; //ASR
+              2'b11: Result = a <<< 2 * b; //ROR
+             endcase
+           end
+       end
+       5'b00010: Result = a & b; // AND, TST
+       5'b00011: Result = a | b; // ORR
+       5'b00111: Result = a ^ b; // EOR, TEQ
+
+       5'b01100: Result = sum + carry; // ADC
+       5'b00101: Result = sum - ~carry; // SBC
+       5'b01000: Result = b - a - ~carry; // RSC
+       5'b01101: Result = b - a; // RSB
+       5'b00110: Result = a & ~b; // BIC
+
        default: Result = 32'bx;
      endcase
 
-   assign neg      = Result[31];
-   assign zero     = (Result == 32'b0);
-   assign carry    = (ALUControl[1] == 1'b0) & sum[32];
-   assign overflow = (ALUControl[1] == 1'b0) & 
+always_comb 
+  if(ALUControl[4:0] = 5'b10000)
+    begin
+      neg      = Result[31];
+      zero     = (Result == 32'b0);
+      carry    = (ALUControl[1] == 1'b0) & sum[32];
+      overflow = (ALUControl[1] == 1'b0) & 
                      ~(a[31] ^ b[31] ^ ALUControl[0]) & 
                      (a[31] ^ sum[31]); 
-   assign ALUFlags = {neg, zero, carry, overflow};
+      ALUFlags = {neg, zero, carry, overflow};
+    end
    
 endmodule // alu
