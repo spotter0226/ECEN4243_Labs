@@ -514,15 +514,13 @@ module alu (input  logic [31:0] a, b,
       //5'b0_1101:  Result = ~a; // MVN Rd = ~Rn
       //5'b0_1110:  Result = ; // ROR Rn ror Src2
       //5'b0_1111:  Result = a - b - ~carry; // SBC Rn - Src2 - ~C
-       //5'b1_0000:  Result = ; // TEQ Rn ^ Src2 (test that, then set flags)
-       //5'b1_0001:  Result = ; // TST Rn & Src2 (test, then set flags)*/
+      //5'b1_0000:  Result = ; // TEQ Rn ^ Src2 (test that, then set flags)
+      //5'b1_0001:  Result = ; // TST Rn & Src2 (test, then set flags)*/
 
        5'b10000:
        begin
          if (I == 1) //MOV
-         {
            Result = b;
-         }
          else
            begin
              casex (sh)
@@ -547,7 +545,7 @@ module alu (input  logic [31:0] a, b,
      endcase
 
 always_comb 
-  if(ALUControl[4:0] = 5'b10000)
+  if(ALUControl[4:0] != 5'b10000)
     begin
       neg      = Result[31];
       zero     = (Result == 32'b0);
