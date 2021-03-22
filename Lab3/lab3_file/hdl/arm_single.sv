@@ -211,10 +211,10 @@ module decoder (input  logic [1:0] Op,
            4'b1010: ALUControl = 5'b00001; // CMP--
            4'b1011: ALUControl = 5'b00000; // CMN--
            4'b1101: ALUControl = 5'b10000; // MOV, LSL, LSR, ASR, ROR--
-           //4'b1101: ALUControl = 5'b10001; // LSL
-           //4'b1101: ALUControl = 5'b10010; // LSR
-           //4'b1101: ALUControl = 5'b10011; // ASR
-           //4'b1101: ALUControl = 5'b10100; // ROR
+         //4'b1101: ALUControl = 5'b10001; // LSL
+         //4'b1101: ALUControl = 5'b10010; // LSR
+         //4'b1101: ALUControl = 5'b10011; // ASR
+         //4'b1101: ALUControl = 5'b10100; // ROR
            4'b1111: ALUControl = 5'b00001; // MVN--
 
            4'b0000: ALUControl = 5'b00010; // AND--
@@ -531,6 +531,7 @@ module alu (input  logic [31:0] a, b,
              endcase
            end
        end
+       
        5'b00010: Result = a & b; // AND, TST
        5'b00011: Result = a | b; // ORR
        5'b00111: Result = a ^ b; // EOR, TEQ
