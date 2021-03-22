@@ -1,5 +1,5 @@
 # vsim "+nowarn3829" -error 3015 -voptargs="+acc" -l transcript.txt work.testbench 
-# Start time: 01:41:14 on Mar 21,2021
+# Start time: 22:32:32 on Mar 21,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading sv_std.std
 # Loading work.testbench(fast)
@@ -20,5 +20,7 @@
 # Loading work.alu(fast)
 # Loading work.imem(fast)
 # Loading work.dmem(fast)
-# End time: 01:44:44 on Mar 21,2021, Elapsed time: 0:03:30
-# Errors: 0, Warnings: 0
+add wave -position 29 sim:/testbench
+# (vish-4014) No objects found matching '/testbench'.
+# End time: 22:55:35 on Mar 21,2021, Elapsed time: 0:23:03
+# Errors: 1, Warnings: 0
