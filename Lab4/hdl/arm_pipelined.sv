@@ -509,7 +509,7 @@ module datapath (input  logic        clk, reset,
                     .src2(InstructE[11:0]),
                     .S(InstructE[20]),
                     .Result(ALUResultE),
-                    .ALUFlags(ALUFlagsE));
+                    .Flags(ALUFlagsE));
    
    // Memory Stage
    flopenr #(32) aluresreg (.clk(clk),
@@ -663,16 +663,21 @@ module extend (input  logic [23:0] Instr,
                output logic [31:0] ExtImm);
    logic [3:0] rotate;
    assign rotate = Instr[11:8];
+   //Leave this declaration for shift
    logic [31:0] shift;
+   //remove this line
    assign shift = (Instr[7:0] >> 2*rotate | (Instr[7:0] << (32 - 2*rotate)));
 
    always_comb
      case(ImmSrc) 
+       //Change each of these to set shift instead of ExtImm
        2'b00:   ExtImm = {24'b0, shift};  // 8-bit unsigned immediate
        2'b01:   ExtImm = {20'b0, Instr[11:0]}; // 12-bit unsigned immediate 
        2'b10:   ExtImm = {{6{Instr[23]}}, Instr[23:0], 2'b00}; // Branch
        default: ExtImm = 32'bx; // undefined
-     endcase             
+     endcase 
+     //After the case, assign (or set) ExtImm equal to shift with the rotation
+     //Similar to what you have for the current shift assignment            
 
 endmodule // extend
 
@@ -734,7 +739,7 @@ always_comb
       overflow = (ALUControl[1] == 1'b0) & 
                      ~(a[31] ^ b[31] ^ ALUControl[0]) & 
                      (a[31] ^ sum[31]); 
-      ALUFlags = {neg, zero, carry, overflow}; // It doesn't like something here. Says that this is an undefined variable. We need to figure this out before I can move forward.
+      assign Flags = {neg, zero, carry, overflow}; // It doesn't like something here. Says that this is an undefined variable. We need to figure this out before I can move forward.
     end
 
 endmodule // alu
