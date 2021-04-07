@@ -706,7 +706,7 @@ module alu (input  logic [31:0] a, b,
               casex (src2[6:5])
               2'b00: Result = b << src2[11:7]; //LSL
               2'b01: Result = b >> src2[11:7]; //LSR
-              2'b10: Result = b >>> src2[11:7]; //ASR
+              2'b10: Result = b >>> src2[11:7]; //ASR 
               2'b11: Result = (b >> 2*src2[11:7]| (b <<(32 - 2*src2[11:7]))); //ROR
               endcase
             end
@@ -734,7 +734,7 @@ always_comb
       overflow = (ALUControl[1] == 1'b0) & 
                      ~(a[31] ^ b[31] ^ ALUControl[0]) & 
                      (a[31] ^ sum[31]); 
-      ALUFlags = {neg, zero, carry, overflow};
+      ALUFlags = {neg, zero, carry, overflow}; // It doesn't like something here. Says that this is an undefined variable. We need to figure this out before I can move forward.
     end
 
 endmodule // alu

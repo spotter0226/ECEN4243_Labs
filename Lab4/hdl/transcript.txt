@@ -1,0 +1,11 @@
+# vsim "+nowarn3829" -error 3015 -voptargs="+acc" -l transcript.txt work.testbench 
+# Start time: 18:21:37 on Apr 06,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error (suppressible): arm_pipelined.sv(505): (vopt-2912) Port 'ALUFlags' not found in module 'alu' (8th connection).
+# Optimization failed
+# Error loading design
+# Error: Error loading design
+#        Pausing macro execution
+# MACRO ./arm_pipelined.do PAUSED at line 35
+# End time: 18:22:27 on Apr 06,2021, Elapsed time: 0:00:50
+# Errors: 1, Warnings: 0

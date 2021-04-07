@@ -26,7 +26,7 @@ if [file exists work] {
 }
 vlib work
 
-set MEMORY_FILE ./memfile.dat
+set MEMORY_FILE ./addiu.dat
 
 # compile source files
 vlog imem.v dmem.v arm_pipelined.sv top.sv tb.sv
