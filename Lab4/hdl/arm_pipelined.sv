@@ -509,7 +509,7 @@ module datapath (input  logic        clk, reset,
                     .src2(InstructE[11:0]),
                     .S(InstructE[20]),
                     .Result(ALUResultE),
-                    .Flags(ALUFlagsE));
+                    .ALUFlags(ALUFlagsE));
    
    // Memory Stage
    flopenr #(32) aluresreg (.clk(clk),
@@ -739,7 +739,10 @@ always_comb
       overflow = (ALUControl[1] == 1'b0) & 
                      ~(a[31] ^ b[31] ^ ALUControl[0]) & 
                      (a[31] ^ sum[31]); 
-      assign Flags = {neg, zero, carry, overflow}; // It doesn't like something here. Says that this is an undefined variable. We need to figure this out before I can move forward.
+      
+      ALUFlags = {neg, zero, carry, overflow}; 
+      //Fixed I think^
+      // It doesn't like something here. Says that this is an undefined variable. We need to figure this out before I can move forward.
     end
 
 endmodule // alu
