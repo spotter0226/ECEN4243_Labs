@@ -690,7 +690,7 @@ module alu (input  logic [31:0] a, b,
             input  logic [11:0] src2,
             input  logic S, 
             output logic [31:0] Result,
-            output logic [3:0]  Flags);
+            output logic [3:0]  ALUFlags);
 
    logic        neg, zero, carry, overflow;
    logic [31:0] condinvb;
@@ -744,7 +744,7 @@ always_comb
                      (a[31] ^ sum[31]); 
       
       ALUFlags = {neg, zero, carry, overflow}; 
-      //Fixed I think^
+      //Compiles now
       // It doesn't like something here. Says that this is an undefined variable. We need to figure this out before I can move forward.
     end
 
