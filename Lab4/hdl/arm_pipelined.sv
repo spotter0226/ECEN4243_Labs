@@ -662,22 +662,25 @@ module extend (input  logic [23:0] Instr,
                input  logic [1:0]  ImmSrc,
                output logic [31:0] ExtImm);
    logic [3:0] rotate;
+  
    assign rotate = Instr[11:8];
    //Leave this declaration for shift
    logic [31:0] shift;
    //remove this line
-   assign shift = (Instr[7:0] >> 2*rotate | (Instr[7:0] << (32 - 2*rotate)));
+   //assign shift = (Instr[7:0] >> 2*rotate | (Instr[7:0] << (32 - 2*rotate)));
 
    always_comb
      case(ImmSrc) 
        //Change each of these to set shift instead of ExtImm
-       2'b00:   ExtImm = {24'b0, shift};  // 8-bit unsigned immediate
-       2'b01:   ExtImm = {20'b0, Instr[11:0]}; // 12-bit unsigned immediate 
-       2'b10:   ExtImm = {{6{Instr[23]}}, Instr[23:0], 2'b00}; // Branch
-       default: ExtImm = 32'bx; // undefined
+       2'b00:   shift = {24'b0, shift};  // 8-bit unsigned immediate
+       2'b01:   shift = {20'b0, Instr[11:0]}; // 12-bit unsigned immediate 
+       2'b10:   shift = {{6{Instr[23]}}, Instr[23:0], 2'b00}; // Branch
+       default: shift = 32'bx; // undefined
      endcase 
      //After the case, assign (or set) ExtImm equal to shift with the rotation
      //Similar to what you have for the current shift assignment            
+
+    assign ExtImm = rotate + shift; 
 
 endmodule // extend
 
