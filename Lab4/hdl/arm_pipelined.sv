@@ -682,7 +682,7 @@ module alu (input  logic [31:0] a, b,
             input  logic [11:0] src2,
             input  logic S, 
             output logic [31:0] Result,
-            output logic [3:0]  ALUFlags);
+            output logic [3:0]  ALUFlags); 
 
    logic        neg, zero, carry, overflow;
    logic [31:0] condinvb;
