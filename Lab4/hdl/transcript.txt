@@ -1,41 +1,28 @@
-# //  ModelSim PE Student Edition 10.4a Apr  7 2015 
-# //
-# //  Copyright 1991-2015 Mentor Graphics Corporation
-# //  All Rights Reserved.
-# //
-# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
-# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
-# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
-# //  THIS DOCUMENT CONTAINS TRADE SECRETS AND COMMERCIAL OR FINANCIAL
-# //  INFORMATION THAT ARE PRIVILEGED, CONFIDENTIAL, AND EXEMPT FROM
-# //  DISCLOSURE UNDER THE FREEDOM OF INFORMATION ACT, 5 U.S.C. SECTION 552.
-# //  FURTHERMORE, THIS INFORMATION IS PROHIBITED FROM DISCLOSURE UNDER
-# //  THE TRADE SECRETS ACT, 18 U.S.C. SECTION 1905.
-# //
-# // NOT FOR CORPORATE OR PRODUCTION USE.
-# // THE ModelSim PE Student Edition IS NOT A SUPPORTED PRODUCT.
-# // FOR HIGHER EDUCATION PURPOSES ONLY
-# //
-# vsim -do "arm_pipelined.do" 
-# Start time: 15:12:12 on Apr 10,2021
+# vsim "+nowarn3829" -error 3015 -voptargs="+acc" -l transcript.txt work.testbench 
+# Start time: 14:17:39 on Apr 10,2021
+# ** Note: (vsim-3812) Design is being optimized...
 # Loading sv_std.std
-# Loading work.testbench
-# Loading work.top
-# Loading work.arm
-# Loading work.controller
-# Loading work.flopenrc
-# Loading work.flopenr
-# Loading work.conditional
-# Loading work.datapath
-# Loading work.mux2
-# Loading work.adder
-# Loading work.regfile
-# Loading work.extend
-# Loading work.mux3
-# Loading work.alu
-# Loading work.eqcmp
-# Loading work.hazard
-# Loading work.imem
-# Loading work.dmem
-# End time: 15:22:07 on Apr 10,2021, Elapsed time: 0:09:55
-# Errors: 0, Warnings: 0
+# Loading work.testbench(fast)
+# Loading work.top(fast)
+# Loading work.arm(fast)
+# Loading work.controller(fast)
+# Loading work.flopenrc(fast)
+# Loading work.flopenr(fast)
+# Loading work.flopenr(fast__1)
+# Loading work.conditional(fast)
+# Loading work.flopenr(fast__2)
+# Loading work.flopenr(fast__3)
+# Loading work.datapath(fast)
+# Loading work.mux2(fast)
+# Loading work.flopenr(fast__4)
+# Loading work.adder(fast)
+# Loading work.flopenrc(fast__1)
+# Loading work.mux2(fast__1)
+# Loading work.regfile(fast)
+# Loading work.extend(fast)
+# Loading work.mux3(fast)
+# Loading work.alu(fast)
+# Loading work.eqcmp(fast)
+# Loading work.hazard(fast)
+# Loading work.imem(fast)
+# Loading work.dmem(fast)
