@@ -17,7 +17,7 @@
 # // FOR HIGHER EDUCATION PURPOSES ONLY
 # //
 # vsim -do "arm_pipelined.do" 
-# Start time: 16:51:04 on Apr 09,2021
+# Start time: 15:12:12 on Apr 10,2021
 # Loading sv_std.std
 # Loading work.testbench
 # Loading work.top
@@ -37,5 +37,5 @@
 # Loading work.hazard
 # Loading work.imem
 # Loading work.dmem
-# End time: 16:53:54 on Apr 09,2021, Elapsed time: 0:02:50
+# End time: 15:22:07 on Apr 10,2021, Elapsed time: 0:09:55
 # Errors: 0, Warnings: 0
