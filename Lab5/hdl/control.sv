@@ -40,6 +40,61 @@ module CacheControl(input Strobe,
    wait_state WaitStateCtr (LdCtr, WSCLoadVal, CtrSig, clk);
 
    // Insert FSM Here
+   /*
+     always @(posedge clk)
+     begin
+	if (reset == 1'b1)	
+	  CURRENT_STATE <=  Idle;
+	else
+	  CURRENT_STATE <=  NEXT_STATE;
+     end
+   
+   always @(CURRENT_STATE or X)
+     begin
+ 	case(CURRENT_STATE)
+      Idle:
+         if (Strobe == 0) 
+         begin
+            LdCtr   = 1;
+            ReadyEn = 0; 
+            Ready   = 0;
+            W       = 0;
+            MStrobe = 0;
+            MRW     = 0;
+            RSel    = 0;
+            WSel    = 0;
+            NEXT_STATE <= Idle;
+         end else
+         begin
+            if (DRW == 1)
+            begin
+               LdCtr   = 1;
+               ReadyEn = 0; 
+               Ready   = 0;
+               W       = 0;
+               MStrobe = 0;
+               MRW     = 0;
+               RSel    = 0;
+               WSel    = 0;
+               NEXT_STATE <= Write;
+            end
+            else begin
+               LdCtr   = 1;
+               ReadyEn = 0; 
+               Ready   = 0;
+               W       = 0;
+               MStrobe = 0;
+               MRW     = 0;
+               RSel    = 0;
+               WSel    = 0;
+               NEXT_STATE <= Read;
+            end
+         end
+      Read:
+         
+
+
+   */
 
 
 endmodule /* Control */
