@@ -40,63 +40,139 @@ module CacheControl(input Strobe,
    wait_state WaitStateCtr (LdCtr, WSCLoadVal, CtrSig, clk);
 
    // Insert FSM Here
-   /*
-     always @(posedge clk)
+ always @(posedge clk)
      begin
-	if (reset == 1'b1)	
-	  CURRENT_STATE <=  Idle;
-	else
-	  CURRENT_STATE <=  NEXT_STATE;
+         if (reset == 1'b1)	
+            CURRENT_STATE <=  Idle;
+         else
+            CURRENT_STATE <=  NEXT_STATE;
      end
-   
-   always @(CURRENT_STATE or X)
-     begin
- 	case(CURRENT_STATE)
-      Idle:
-         if (Strobe == 0) 
-         begin
-            LdCtr   = 1;
-            ReadyEn = 0; 
-            Ready   = 0;
-            W       = 0;
-            MStrobe = 0;
-            MRW     = 0;
-            RSel    = 0;
-            WSel    = 0;
-            NEXT_STATE <= Idle;
-         end else
-         begin
-            if (DRW == 1)
+
+   always @(CtrSig or Strobe or M or V or DRW or CURRENT_STATE)
+   begin
+      case(CURRENT_STATE)
+         Idle:	
+            if (Strobe == 1'b0) // idle
+               begin
+                  OutputLogic = 8'b10000000;
+                  NEXT_STATE <=  Idle;
+               end 
+            else if (Strobe == 1'b1 && DRW == 1'b1) // write
+               begin
+                  OutputLogic = 8'b10000000;
+                  NEXT_STATE <=  Write;
+               end
+            else // read
+               begin
+                  OutputLogic = 8'b10000000;
+                  NEXT_STATE <=  Read;
+               end
+
+         Read:	
+            if (M == 1'b0 && V == 1'b0)
+               begin
+                  OutputLogic = 8'b11000000;
+                  NEXT_STATE <=  ReadMiss;
+               end 
+            else if ( M == 1'b0 && V == 1'b1)
+               begin
+                  OutputLogic = 8'b11000000;
+                  NEXT_STATE <=  ReadMiss;
+               end
+            else if ( M == 1'b1 && V == 1'b0)
+               begin
+                  OutputLogic = 8'b11000000;
+                  NEXT_STATE <=  ReadMiss;
+               end
+            else
+               begin
+                  OutputLogic = 8'b00110110;
+                  NEXT_STATE <= Idle;
+               end		
+
+         ReadMiss:	
+            if (CtrSig == 1'bx)
+               begin
+                  OutputLogic = 8'b10001000;
+                  NEXT_STATE <=  ReadMem;
+               end 
+            else if ( CtrSig == 1'b1)
+               begin
+                  OutputLogic = 8'b00000000;
+                  NEXT_STATE <=  ReadData;
+               end
+            else 
+               begin
+                  OutputLogic = 8'b00000000;
+                  NEXT_STATE <=  ReadMem;
+               end	
+
+         ReadData:	
             begin
-               LdCtr   = 1;
-               ReadyEn = 0; 
-               Ready   = 0;
-               W       = 0;
-               MStrobe = 0;
-               MRW     = 0;
-               RSel    = 0;
-               WSel    = 0;
-               NEXT_STATE <= Write;
+               OutputLogic = 8'b00110110;
+               NEXT_STATE = Idle;
+            end	
+
+         Write:	
+            if (M == 1'b0 && V == 1'b0)
+               begin
+                  OutputLogic = 8'b10000000;
+                  NEXT_STATE <=  WriteMiss;
+               end 
+            else if ( M == 1'b0 && V == 1'b1)
+               begin
+                  OutputLogic = 8'b10000000;
+                  NEXT_STATE <=  WriteMiss;
+               end
+            else if ( M == 1'b0 && V == 1'b1)
+               begin
+                  OutputLogic = 8'b10000000;
+                  NEXT_STATE <=  WriteMiss;
+               end
+            else 
+               begin
+                  OutputLogic = 8'b10000000;
+                  NEXT_STATE <=  WriteHit;
+               end	
+
+         WriteMiss:	
+            begin
+               OutputLogic = 8'b10001100;
+               NEXT_STATE <= WriteMem;
             end
-            else begin
-               LdCtr   = 1;
-               ReadyEn = 0; 
-               Ready   = 0;
-               W       = 0;
-               MStrobe = 0;
-               MRW     = 0;
-               RSel    = 0;
-               WSel    = 0;
-               NEXT_STATE <= Read;
-            end
-         end
-      Read:
+
+         WriteHit:	
+            begin
+               OutputLogic = 8'b10001100;
+               NEXT_STATE <= WriteMem;
+            end	
+
+         WriteMem:	
+            if (CtrSig == 1'b1)
+               begin
+                  OutputLogic = 8'b00000100;
+                  NEXT_STATE <=  WriteData;
+               end 
+            else 
+               begin
+                  OutputLogic = 8'b00000100;
+                  NEXT_STATE <=  WriteMem;
+               end
          
-
-
-   */
+         WriteData:	
+            begin
+               OutputLogic = 8'b00110101;
+               NEXT_STATE <= Idle;
+            end
+      
+         default: 
+            begin
+               NEXT_STATE <=  Idle;
+               OutputLogic = 8'b10000000;	     
+            end
+	  
+	   endcase // case (CURRENT_STATE)	
+   end // always @ (CURRENT_STATE or X)   
 
 
 endmodule /* Control */
-
-

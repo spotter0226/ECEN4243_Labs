@@ -1,0 +1,18 @@
+// memory data file (do not edit the following line - required for mem load use)
+// instance=/testbench/dut/arm/dp/rf/rf
+// format=mti addressradix=d dataradix=h version=1.0 wordsperline=1
+14: xxxxxxxx
+13: xxxxxxxx
+12: xxxxxxxx
+11: xxxxxxxx
+10: xxxxxxxx
+ 9: xxxxxxxx
+ 8: fffffffe
+ 7: 00000007
+ 6: xxxxxxxx
+ 5: 0000000b
+ 4: 00000007
+ 3: 0000000c
+ 2: 00000007
+ 1: xxxxxxxx
+ 0: 00000000
