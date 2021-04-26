@@ -4,7 +4,7 @@
 # ./blank_cache_files/cache_tag.dat
 # ./blank_cache_files/cache_data.dat
 # Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
-# Start time: 16:12:36 on Apr 23,2021
+# Start time: 10:03:05 on Apr 26,2021
 # vlog -reportprogress 300 wait_state.v control.sv cache.sv comparator.v cacheram.v imem.v dmem_wait.v arm_pipelined.sv top.sv tb.sv 
 # -- Compiling module wait_state
 # -- Compiling module CacheControl
@@ -40,5 +40,5 @@
 # 	flopenr
 # 	flopr
 # 	testbench
-# End time: 16:12:37 on Apr 23,2021, Elapsed time: 0:00:01
+# End time: 10:03:05 on Apr 26,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0

@@ -17,7 +17,7 @@
 # // FOR HIGHER EDUCATION PURPOSES ONLY
 # //
 # vsim -do "arm_pipelined.do" 
-# Start time: 16:12:38 on Apr 23,2021
+# Start time: 10:03:05 on Apr 26,2021
 # Loading sv_std.std
 # Loading work.testbench
 # Loading work.top
@@ -50,6 +50,5 @@
 # ** Note: $stop    : tb.sv(30)
 #    Time: 465 ns  Iteration: 1  Instance: /testbench
 # Break in Module testbench at tb.sv line 30
-# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
-# End time: 16:19:40 on Apr 23,2021, Elapsed time: 0:07:02
-# Errors: 1, Warnings: 0
+# End time: 10:03:33 on Apr 26,2021, Elapsed time: 0:00:28
+# Errors: 0, Warnings: 0

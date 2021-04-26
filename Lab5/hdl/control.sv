@@ -52,24 +52,26 @@ module CacheControl(input Strobe,
    begin
       case(CURRENT_STATE)
          Idle:	
-            if (Strobe == 1'b0) // idle
+            if (Strobe == 1'b0)// If Strobe = 0, then go to Idle
                begin
                   OutputLogic = 8'b10000000;
                   NEXT_STATE <=  Idle;
                end 
-            else if (Strobe == 1'b1 && DRW == 1'b1) // write
+            else //else look at DRW
+            begin
+               if (DRW == 1'b1)// go to write
                begin
                   OutputLogic = 8'b10000000;
                   NEXT_STATE <=  Write;
                end
-            else // read
-               begin
+               else begin //go to read
                   OutputLogic = 8'b10000000;
                   NEXT_STATE <=  Read;
                end
+            end
 
          Read:	
-            if (M == 1'b0 && V == 1'b0)
+            if (M == 1'b0 && V == 1'b0)// check M and V for next state logic
                begin
                   OutputLogic = 8'b11000000;
                   NEXT_STATE <=  ReadMiss;
@@ -86,35 +88,35 @@ module CacheControl(input Strobe,
                end
             else
                begin
-                  OutputLogic = 8'b00110110;
+                  OutputLogic = 8'b11000000;
                   NEXT_STATE <= Idle;
-               end		
+               end	
 
-         ReadMiss:	
-            if (CtrSig == 1'bx)
-               begin
-                  OutputLogic = 8'b10001000;
-                  NEXT_STATE <=  ReadMem;
-               end 
-            else if ( CtrSig == 1'b1)
+         ReadMiss: 
+         begin
+            OutputLogic = 8'b10001000;
+            NEXT_STATE <=  ReadMem;
+         end
+         
+         ReadMem:	 //check CtrSig for ReadMem or ReadData
+            if ( CtrSig == 1'b1)
                begin
                   OutputLogic = 8'b00000000;
                   NEXT_STATE <=  ReadData;
                end
-            else 
-               begin
+            else begin
                   OutputLogic = 8'b00000000;
                   NEXT_STATE <=  ReadMem;
                end	
 
-         ReadData:	
+         ReadData:	//only goes to Idle
             begin
                OutputLogic = 8'b00110110;
                NEXT_STATE = Idle;
             end	
 
          Write:	
-            if (M == 1'b0 && V == 1'b0)
+            if (M == 1'b0 && V == 1'b0) //Check M and V for Write States
                begin
                   OutputLogic = 8'b10000000;
                   NEXT_STATE <=  WriteMiss;
@@ -135,19 +137,19 @@ module CacheControl(input Strobe,
                   NEXT_STATE <=  WriteHit;
                end	
 
-         WriteMiss:	
+         WriteMiss:	//goes to WriteMem
             begin
                OutputLogic = 8'b10001100;
                NEXT_STATE <= WriteMem;
             end
 
-         WriteHit:	
+         WriteHit:	//goes to WriteMem
             begin
                OutputLogic = 8'b10001100;
                NEXT_STATE <= WriteMem;
             end	
 
-         WriteMem:	
+         WriteMem:	//Check CtrSig for next state
             if (CtrSig == 1'b1)
                begin
                   OutputLogic = 8'b00000100;
@@ -159,20 +161,20 @@ module CacheControl(input Strobe,
                   NEXT_STATE <=  WriteMem;
                end
          
-         WriteData:	
+         WriteData:	//only goes to Idle
             begin
                OutputLogic = 8'b00110101;
                NEXT_STATE <= Idle;
             end
       
-         default: 
+         default: //Always start at Idle
             begin
                NEXT_STATE <=  Idle;
                OutputLogic = 8'b10000000;	     
             end
 	  
-	   endcase // case (CURRENT_STATE)	
-   end // always @ (CURRENT_STATE or X)   
+	   endcase 
+   end  
 
 
 endmodule /* Control */

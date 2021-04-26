@@ -10,7 +10,7 @@ cModel Technology
 Z0 dD:/GitHub/ECEN4243_Labs/Lab5/hdl
 vadder
 Z1 DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
-Z2 !s110 1619212357
+Z2 !s110 1619449385
 !i10b 1
 !s100 oU[kPS>VHKBX=i::RECCj3
 I71<=zF`2n;F`>@YH>_fBX3
@@ -26,7 +26,7 @@ Z8 OP;L;10.4a;61
 r1
 !s85 0
 31
-Z9 !s108 1619212356.000000
+Z9 !s108 1619449385.000000
 Z10 !s107 tb.sv|top.sv|arm_pipelined.sv|dmem_wait.v|imem.v|cacheram.v|comparator.v|cache.sv|control.sv|wait_state.v|
 Z11 !s90 -reportprogress|300|wait_state.v|control.sv|cache.sv|comparator.v|cacheram.v|imem.v|dmem_wait.v|arm_pipelined.sv|top.sv|tb.sv|
 !s101 -O0
@@ -82,7 +82,7 @@ R11
 R12
 vcache
 R1
-Z13 !s110 1619212356
+R2
 !i10b 1
 !s100 _>LSazKLcK_lE1ZQXebcT0
 I?YX_Pn3<eDbdbfJfkGfGQ1
@@ -93,7 +93,7 @@ R0
 R5
 8cache.sv
 Fcache.sv
-Z14 L0 10
+Z13 L0 10
 R8
 r1
 !s85 0
@@ -106,15 +106,15 @@ R11
 R12
 vCacheControl
 R1
-R13
+R2
 !i10b 1
-!s100 dPAj?O^7FSMT>fUf;E:_P0
-IA5?[JGOh0=b]U5OzK[]<f0
+!s100 h4z7U4I>`[JIm;IHeI:JH3
+Iza]@^UAVWYB7]JP2[C_hj0
 R3
 !s105 control_sv_unit
 S1
 R0
-w1619212332
+w1619449366
 8control.sv
 Fcontrol.sv
 L0 1
@@ -130,7 +130,7 @@ R11
 R12
 n@cache@control
 vComparator
-R13
+R2
 !i10b 1
 !s100 iGHoLS:T1^@iZLe43dDKA0
 I[i7CFIzH39gnnazl46:1T3
@@ -200,15 +200,15 @@ R11
 !i113 1
 R12
 vdata_ram
-R13
+R2
 !i10b 1
 !s100 COzT2CUFzBk]m@EPWFFNj3
 IRBE0PTgFOl`TSS9X]4XfA2
 R3
 R0
 R5
-Z15 8cacheram.v
-Z16 Fcacheram.v
+Z14 8cacheram.v
+Z15 Fcacheram.v
 L0 66
 R8
 r1
@@ -245,13 +245,13 @@ R11
 !i113 1
 R12
 vdmem_wait
-R13
+R2
 !i10b 1
 !s100 jb27H=`?[^ZLkRHB8bilF0
 ICWbNYS980<o>P3I:R4LN=0
 R3
 R0
-Z17 w1618605088
+Z16 w1618605088
 8dmem_wait.v
 Fdmem_wait.v
 L0 11
@@ -482,16 +482,16 @@ R11
 !i113 1
 R12
 vimem
-R13
+R2
 !i10b 1
 !s100 bcQ0W;Z@5jT82Q@_YE=I>1
 IGcmBSW5gbUHS=DZYifiVG0
 R3
 R0
-R17
+R16
 8imem.v
 Fimem.v
-R14
+R13
 R8
 r1
 !s85 0
@@ -575,15 +575,15 @@ R11
 !i113 1
 R12
 vtag_ram
-R13
+R2
 !i10b 1
 !s100 4faoWj?lKl3P0E8FDJf_a3
 I_<]2cPUJCk1:=g_PHazVo0
 R3
 R0
 R5
+R14
 R15
-R16
 L0 13
 R8
 r1
@@ -605,7 +605,7 @@ R3
 !s105 tb_sv_unit
 S1
 R0
-R17
+R16
 8tb.sv
 Ftb.sv
 L0 1
@@ -629,7 +629,7 @@ R3
 !s105 top_sv_unit
 S1
 R0
-R17
+R16
 8top.sv
 Ftop.sv
 L0 8
@@ -644,15 +644,15 @@ R11
 !i113 1
 R12
 vvalid_ram
-R13
+R2
 !i10b 1
 !s100 b]HQ6]N`38JI<FO:>mkz:1
 ILk9ne?8]a<3Ade1FU0=B>3
 R3
 R0
 R5
+R14
 R15
-R16
 L0 40
 R8
 r1
@@ -665,13 +665,13 @@ R11
 !i113 1
 R12
 vwait_state
-R13
+R2
 !i10b 1
 !s100 5]n60?>H9:?QZ=eU:kVI=1
 I`ni`VGn^?B61HfZM?WFQC0
 R3
 R0
-R17
+R16
 8wait_state.v
 Fwait_state.v
 L0 1
