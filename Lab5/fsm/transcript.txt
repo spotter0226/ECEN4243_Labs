@@ -1,5 +1,5 @@
 # vsim "+nowarn3829" -error 3015 -voptargs="+acc" -l transcript.txt work.stimulus 
-# Start time: 20:52:00 on Apr 30,2021
+# Start time: 13:19:08 on May 01,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Note: (vopt-143) Recognized 1 FSM in module "fsm(fast)".
 # Loading sv_std.std
@@ -7,5 +7,5 @@
 # Loading work.fsm(fast)
 # .main_pane.list.interior.cs.body
 # .main_pane.wave.interior.cs.body.pw.wf
-# End time: 21:07:26 on Apr 30,2021, Elapsed time: 0:15:26
+# End time: 14:00:27 on May 01,2021, Elapsed time: 0:41:19
 # Errors: 0, Warnings: 0

@@ -9,17 +9,17 @@ z2
 cModel Technology
 Z0 dC:/Users/Steph/Documents/GitHub/ECEN4243_Labs/Lab5/fsm
 T_opt
-Z1 !s110 1619833920
-V9doMRH`kjfK7SGngCP^UI0
+!s110 1619893149
+V2A?3fm4X0a=UfhBk09oC<2
 04 8 4 work stimulus fast 0
-=1-10e7c6f91ef8-608cb440-1c1-5f54
+=1-10e7c6f91ef8-608d9b9d-df-50c
 o-quiet -auto_acc_if_foreign -work work -error 3015 +acc
-Z2 tCvgOpt 0
+Z1 tCvgOpt 0
 n@_opt
 OL;O;10.7f;67
 vfsm
-Z3 DXx6 sv_std 3 std 0 22 d=_JfHTnXCN[H5FjiaJJc0
-R1
+Z2 DXx6 sv_std 3 std 0 22 d=_JfHTnXCN[H5FjiaJJc0
+Z3 !s110 1619893148
 !i10b 1
 !s100 M<_DY4l@C52hh=8VhK@2`0
 I2ZBDHB?Ba[d2nkZbbj^4[3
@@ -35,15 +35,15 @@ Z6 OL;L;10.7f;67
 r1
 !s85 0
 31
-Z7 !s108 1619833920.000000
+Z7 !s108 1619893148.000000
 Z8 !s107 fsm_test.sv|fsm.sv|
 Z9 !s90 -reportprogress|300|fsm.sv|fsm_test.sv|
 !i113 0
 Z10 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R2
-vstimulus
-R3
 R1
+vstimulus
+R2
+R3
 !i10b 1
 !s100 >_J:2jnBaXh5UNnSdl?^<1
 Iam]HNAdl`g[NAUVh]Iaab3
@@ -64,4 +64,4 @@ R8
 R9
 !i113 0
 R10
-R2
+R1
